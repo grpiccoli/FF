@@ -1,0 +1,411 @@
+﻿@model FPFI.Models.Entry3
+@using FPFI.Models.ViewModels
+
+@{
+    ViewData["Title"] = "3 Validate Input";
+    ViewData.AddActivePage(EntriesNavPages.Step3);
+    var inview = Model.Inputs.FirstOrDefault();
+    var lng = Model.Inputs.Count().ToString().Length;
+    var id = ViewContext.RouteData.Values["id"];
+    var rpp = ViewData["rpp"];
+    var pg = ViewData["pg"] as string;
+    var asc = ViewData["asc"] as string;
+    var srt = ViewData["srt"] as string;
+    var last = ViewData["last"] as string;
+}
+
+@section Styles{
+    <style>
+        input {
+            padding: 10px;
+            align-self: center;
+        }
+        table thead tr {
+            display: block;
+        }
+        table th, table td {
+            width: 100px;
+        }
+        table tbody {
+            display: block;
+            height: 50vh;
+            overflow: auto;
+        }
+        table thead .sorting, .sorting_asc, .sorting_desc {
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+        table thead .sorting {
+            background-image: url("/images/sort_both.png");
+        }
+        table thead .sorting_asc {
+            background-image: url("/images/sort_asc.png");
+        }
+        table thead .sorting_desc {
+            background-image: url("/images/sort_desc.png");
+        }
+    </style>
+}
+
+@{
+    var _asc = Convert.ToBoolean(asc);
+}
+
+@await Html.PartialAsync("_Paging", new PagingPartial
+{
+    Pg = Convert.ToInt32(pg),
+    Action = "Step3",
+    Asc = Convert.ToBoolean(asc),
+    Controller = "Entries",
+    Last = Convert.ToInt32(last),
+    Rpp = Convert.ToInt32(rpp),
+    Srt = srt
+})
+
+
+    <form id="Step3" asp-action="Step3" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" class="hidden" readonly />
+        <input asp-for="AgeStart" class="hidden" readonly />
+        <input asp-for="AgeEnd" class="hidden" readonly />
+        <div style="overflow-x:auto;">
+            <table id="myTable" class="table table-striped dt-responsive">
+                <thead>
+                    <tr>
+                        <th class="sorting@(srt == "Id_" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Id_"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Id_)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Macrostand" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Macrostand"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Macrostand)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Pyear" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Pyear"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Pyear)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Age" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Age"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Age)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "N" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="N"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.N)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "BA" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="BA"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.BA)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Dg" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Dg"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Dg)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "DBH_sd" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="DBH_sd"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.DBH_sd)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "DBH_max" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="DBH_max"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.DBH_max)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "D100" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="D100"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.D100)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Hd" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Hd"
+                               asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Hd)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Vt" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Vt" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Vt)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Years" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Years" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Years)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "ThinningAges" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="ThinningAges" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.ThinningAges)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "NAfterThins" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="NAfterThins" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.NAfterThins)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "ThinTypes" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="ThinTypes" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.ThinTypes)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "ThinCoefs" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="ThinCoefs" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.ThinCoefs)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Hp" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Hp" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Hp)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Hm" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Hm" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Hm)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Random_SI" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Random_SI" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Random_SI)
+                            </a>
+                        </th>
+                        <th class="sorting@(srt == "Random_BA" ? _asc ? "_asc" : "_desc" : "")">
+                            <a style="color:black"
+                               asp-route-rpp="@rpp"
+                               asp-route-srt="Random_BA" asp-route-asc="@(_asc ? "false" : "true")">
+                                @Html.DisplayNameFor(modelItem => inview.Random_BA)
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var input in Model.Inputs)
+                {
+                    <tr>
+                        <td>
+                            <input style="width:@( (lng * 8) + 50 )px;"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Id_"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Id_)" />
+                            <span asp-validation-for="Inputs.First().Id_" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:@( (lng * 8) + 50 )px;"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Macrostand"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Macrostand)" />
+                            <span asp-validation-for="Inputs.First().Macrostand" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <select style="width:82px;"
+                                    class="form-control"
+                                    asp-for="@input.Pyear"
+                                    asp-items="ViewBag.Years"></select>
+                        </td>
+                        <td>
+                            <input style="width:90px;"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Age"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Age)" />
+                            <span asp-validation-for="Inputs.First().Age" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:106px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.N"
+                                   placeholder="@Html.DisplayFor(modelItem => input.N)" />
+                            <span asp-validation-for="Inputs.First().N" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.BA"
+                                   placeholder="@Html.DisplayFor(modelItem => input.BA)" />
+                            <span asp-validation-for="Inputs.First().BA" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Dg"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Dg)" />
+                            <span asp-validation-for="Inputs.First().Dg" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.DBH_sd"
+                                   placeholder="@Html.DisplayFor(modelItem => input.DBH_sd)" />
+                            <span asp-validation-for="Inputs.First().DBH_sd" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.DBH_max"
+                                   placeholder="@Html.DisplayFor(modelItem => input.DBH_max)" />
+                            <span asp-validation-for="Inputs.First().DBH_max" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.D100"
+                                   placeholder="@Html.DisplayFor(modelItem => input.D100)" />
+                            <span asp-validation-for="Inputs.First().D100" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Hd"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Hd)" />
+                            <span asp-validation-for="Inputs.First().Hd" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:66px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Vt"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Vt)" />
+                            <span asp-validation-for="Inputs.First().Vt" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:66px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Years"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Years)" />
+                            <span asp-validation-for="Inputs.First().Years" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.ThinningAges"
+                                   placeholder="@Html.DisplayFor(modelItem => input.ThinningAges)" />
+                            <span asp-validation-for="Inputs.First().ThinningAges" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.NAfterThins"
+                                   placeholder="@Html.DisplayFor(modelItem => input.NAfterThins)" />
+                            <span asp-validation-for="Inputs.First().NAfterThins" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:95px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.ThinTypes"
+                                   placeholder="@Html.DisplayFor(modelItem => input.ThinTypes)" />
+                            <span asp-validation-for="Inputs.First().ThinTypes" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:95px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.ThinCoefs"
+                                   placeholder="@Html.DisplayFor(modelItem => input.ThinCoefs)" />
+                            <span asp-validation-for="Inputs.First().ThinCoefs" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:60px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Hp"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Hp)" />
+                            <span asp-validation-for="Inputs.First().Hp" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:65px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Hm"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Hm)" />
+                            <span asp-validation-for="Inputs.First().Hm" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Random_SI"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Random_SI)" />
+                            <span asp-validation-for="Inputs.First().Random_SI" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:90px"
+                                   class="form-control dynamic"
+                                   asp-for="@input.Random_BA"
+                                   placeholder="@Html.DisplayFor(modelItem => input.Random_BA)" />
+                            <span asp-validation-for="Inputs.First().Random_BA" class="text-danger"></span>
+                        </td>
+                    </tr>
+            }
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+@await Html.PartialAsync("_Paging", new PagingPartial
+{
+    Pg = Convert.ToInt32(pg),
+    Action = "Step3",
+    Asc = _asc,
+    Controller = "Entries",
+    Last = Convert.ToInt32(last),
+    Rpp = Convert.ToInt32(rpp),
+    Srt = srt
+})
+
+@section Scripts{
+    <script>
+        $("input.dynamic").keydown(
+            function () {
+                this.style.width = ((this.value.length * 8) + 50) + 'px';
+            }
+        );
+    </script>
+}

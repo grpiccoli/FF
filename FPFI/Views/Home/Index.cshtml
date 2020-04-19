@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "FPFI Solutions";
+}
+
+@section Styles{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/home.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/home.min.css" asp-append-version="true" />
+    </environment>
+}
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <img src="~/images/logo_trazadofpfi.min.png" alt="fpfi icon" class="img-responsive" />
+            </div>
+            <div class="col-md-7" style="min-height:60vh">
+                <h2 class="quote text">@Localizer["Our mission is to translate your quantitative data into production results"]</h2>
+                <h4 class="quote text">@Localizer["<i>\"The most reliable way to forecast the future is to try to understand the present\"</i>"]</h4><h5 class="author">John Naisbitt</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a target="_blank" href="mailto:grpiccoli@epicsolutions.cl">
+    <img src="~/images/epic.png" alt="epic icon" class="img-responsive" style="float:left;color:black;" width="40" />
+</a>

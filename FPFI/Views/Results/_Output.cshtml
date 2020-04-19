@@ -1,0 +1,14 @@
+﻿@model OutputViewModel
+@using FPFI.Models.ViewModels
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader
+{
+    Heading = "Entry: " + Model.Id + ", FPFI Version: " + Model.Version
+})
+<pre>
+    <code>
+        @*@await Html.PartialAsync($"~/Views/Logs/_{Model.Version}{Model.Id}.cshtml")*@
+        @Model.Output
+    </code>
+</pre>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true })

@@ -1,0 +1,11 @@
+﻿@model FPFI.Models.Entry2
+@using FPFI.Models.ViewModels
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader
+{
+    Heading = "Entry: " + Model.Id 
+})
+<p>
+    @Html.DisplayFor(model => model.Output)
+</p>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true })

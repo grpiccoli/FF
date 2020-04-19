@@ -1,0 +1,11 @@
+﻿@model string
+@using FPFI.Models.ViewModels
+
+<form asp-action="Delete">
+    @Html.Partial("_ModalHeader", new ModalHeader { Heading = "Delete result" })
+
+    <div class="modal-body form-horizontal">
+        Are you sure you want delete results of entry @Model?
+    </div>
+    @Html.Partial("_ModalFooter", new ModalFooter { SubmitButtonText = "Delete" })
+</form>

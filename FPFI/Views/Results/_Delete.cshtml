@@ -1,0 +1,12 @@
+﻿@model DeleteViewModel
+@using FPFI.Models.ViewModels
+
+<form asp-action="Delete">
+    <partial name="_ModalHeader" model='new ModalHeader { Heading = "Delete result" }' />
+    <input class="hidden" asp-for="Id" />
+    <input class="hidden" asp-for="Ver" />
+    <div class="modal-body form-horizontal">
+        Are you sure you want delete all results of entry @Model.Id version @Model.Ver?
+    </div>
+    <partial name="_ModalFooter" model='new ModalFooter { SubmitButtonText = "Delete" }' />
+</form>

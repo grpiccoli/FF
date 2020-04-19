@@ -1,0 +1,103 @@
+﻿@model IEnumerable<FPFI.Models.Entry2>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-controller="Inputs" asp-action="Create">Create New</a>
+</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgeStart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgeEnd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Distribution)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DistributionThinning)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deviation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Species)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeightFunction)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolumeFormula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Way)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IP)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUser)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgeStart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgeEnd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Distribution)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DistributionThinning)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Deviation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Species)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HeightFunction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VolumeFormula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Way)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

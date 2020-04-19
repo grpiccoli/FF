@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <style>
+        .disabled {
+            pointer-events: none;
+            opacity:0.6;
+            color: #666;
+        }
+        .nav-tabs {
+            border-bottom: 2px solid #DDD;
+        }
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+            border-width: 0;
+        }
+
+            .nav-tabs > li > a {
+                border: none;
+                color: mediumseagreen;
+            }
+
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+            border: none;
+            color: #4285F4 !important;
+            background: transparent;
+        }
+
+        .nav-tabs > li > a::after {
+            content: "";
+            background: #4285F4;
+            height: 2px;
+            position: absolute;
+            width: 100%;
+            left: 0px;
+            bottom: -1px;
+            transition: all 250ms ease 0s;
+            transform: scale(0);
+        }
+
+        .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+            transform: scale(1);
+        }
+
+        .tab-nav > li > a::after {
+            background: #21527d none repeat scroll 0% 0%;
+            color: #fff;
+        }
+
+        .tab-pane {
+            padding: 15px 0;
+        }
+    </style>
+    @RenderSection("Styles", required: false)
+}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>Submit Entry</h2>
+            <h4>Process a new input file</h4>
+        </div>
+        <div class="panel-body">
+            @await Html.PartialAsync("_EntriesNav")
+        </div>
+        <div class="panel-footer">
+            @await Html.PartialAsync("_EntriesToolBar")
+        </div>
+        <div class="panel-body">
+            @RenderBody()
+        </div>
+        <div class="panel-footer">
+            @await Html.PartialAsync("_EntriesToolBar")
+        </div>
+    </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @RenderSection("Scripts", required: false)
+}
+

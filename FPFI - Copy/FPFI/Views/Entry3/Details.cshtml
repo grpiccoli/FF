@@ -1,0 +1,120 @@
+﻿@model FPFI.Models.Entry3
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Entry3</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Include_Thinning)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Include_Thinning)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ByClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ByClass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stump)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stump)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MgDisc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MgDisc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LengthDisc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LengthDisc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeStart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgeStart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeEnd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgeEnd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Distribution)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Distribution)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DistributionThinning)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DistributionThinning)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolumeFormula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolumeFormula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Way)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Way)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessStart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProcessStart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProcessTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

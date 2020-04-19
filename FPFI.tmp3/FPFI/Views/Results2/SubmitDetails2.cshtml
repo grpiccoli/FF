@@ -1,0 +1,69 @@
+﻿@model IEnumerable<FPFI.Models.Simulation>
+
+@{
+    ViewData["Title"] = "Results";
+
+    var layout = new List<string>
+    {
+        "Hd","N","Dg","Vt","CAI_Dg","CAI_Vt","MAI_Dg","MAI_Vt"
+    };
+}
+
+<h2>Results</h2>
+
+@section Styles{
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+}
+<div>
+    <h4>Results</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <div id="Dg"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="CAI_Dg"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="MAI_Dg"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="Vt"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="CAI_Vt"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="MAI_Vt"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="Hd"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="N"></div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        @foreach(var i in layout)
+        {
+            @:var @i = @Html.Raw(ViewData["Data"+i]);
+            @:var @("lo"+i) = @Html.Raw(ViewData["Layout"+i]);
+            @:Plotly.newPlot('@i', @i, @("lo"+i));
+        }
+
+        //var hd = document.getElementById('hd');
+        //hd.on('plotly_hover', function (e) {
+        //    console.log(e);
+        //});
+    </script>
+}
+<div>
+    <a asp-action="Submitted">Back to Submitted Entries</a>
+</div>

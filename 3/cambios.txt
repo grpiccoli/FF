@@ -1,0 +1,197 @@
+----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------- 
+commit 5655b4b2f46429ecb6189e6624c2a62f67250a55
+Author: alvarop <alvaro.paredes@fpfi.cl>
+Date:   Fri Oct 19 13:43:11 2018 -0300
+
+    load R library v0.6.1
+
+diff --git a/R_library/fpfi3_0.6.1.tar.gz b/R_library/fpfi3_0.6.1.tar.gz
+new file mode 100644
+index 0000000..8fcac3d
+Binary files /dev/null and b/R_library/fpfi3_0.6.1.tar.gz differ
+
+----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------- 
+---------------------- CON ESTOS CAMBIOS DEJÓ DE FUNCIONAR, INCLUSO VOLVIENDO A LA LIBRERÍA ANTERIOR (0.6.1)
+---------------------------------------------------------------------------------------------------------------------------------------- 
+commit 3a82efbba310b08bd173bc67bb150f8810679f31
+Author: alvarop <alvaro.paredes@fpfi.cl>
+Date:   Fri Oct 19 10:50:02 2018 -0300
+
+    changed name uruguay_guanare to solid1 (using uruguay_solid in R). Previous uruguay_solid it's now uruguay_solid2 (using uruguay_solid2 in R)
+
+diff --git a/FPFI/Controllers/Entry3Controller.cs b/FPFI/Controllers/Entry3Controller.cs
+index fcbe1a6..58c5fad 100644
+--- a/FPFI/Controllers/Entry3Controller.cs
++++ b/FPFI/Controllers/Entry3Controller.cs
+@@ -52,7 +52,7 @@ namespace FPFI.Controllers
+ 
+             var selectedId = _context
+                 .Tree.Include(t => t.Species).Include(t => t.Region)
+-                .Single(t => t.Region.Command == "uruguay_guanare"
++                .Single(t => t.Region.Command == "uruguay_solid"
+                 && t.Species.Command == "eucalyptus_grandis").Id;
+ 
+             ViewData["TreeId"] = new SelectList(
+diff --git a/FPFI/Data/DataInitializer.cs b/FPFI/Data/DataInitializer.cs
+index 5645a00..9ac7d7e 100644
+--- a/FPFI/Data/DataInitializer.cs
++++ b/FPFI/Data/DataInitializer.cs
+@@ -40,8 +40,8 @@ namespace FPFI.Data
+                 new Region{Name="Uruguay",Command="uruguay"},
+                 new Region{Name="FDS",Command="fds"},
+                 new Region{Name="Uruguay pulp",Command="uruguay_pulp"},
+-                new Region{Name="Uruguay solid",Command="uruguay_solid"},
+-                new Region{Name="Uruguay Guanare",Command="uruguay_guanare"},
++                new Region{Name="Uruguay solid-1",Command="uruguay_solid"},
++                new Region{Name="Uruguay solid-2",Command="uruguay_solid2"},
+                 new Region{Name="Brazil MS",Command="brazil_ms"},
+                 new Region{Name="Brazil RS",Command="brazil_rs"},
+                 new Region{Name="Chile",Command="chile"},
+@@ -68,8 +68,8 @@ namespace FPFI.Data
+                 new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus").Id,RegionId=context.Region.Single(i => i.Command == "uruguay").Id},
+                 new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus").Id,RegionId=context.Region.Single(i => i.Command == "fds").Id},
+                 new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_grandis").Id,RegionId=context.Region.Single(i => i.Command == "uruguay_pulp").Id},
+-                new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_grandis").Id,RegionId=context.Region.Single(i => i.Command == "uruguay_solid").Id},
+-                new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_grandis").Id,RegionId=context.Region.Single(i => i.Command == "uruguay_guanare").Id},
++                new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_grandis").Id,RegionId=context.Region.Single(i => i.Command == "uruguay_solid1").Id},
++                new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_grandis").Id,RegionId=context.Region.Single(i => i.Command == "uruguay_solid2").Id},
+                 new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_grandis").Id,RegionId=context.Region.Single(i => i.Command == "brazil_ms").Id},
+                 new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_grandis").Id,RegionId=context.Region.Single(i => i.Command == "brazil_rs").Id},
+                 new Tree{SpeciesId=context.Species.Single(i => i.Command == "eucalyptus_globulus").Id,RegionId=context.Region.Single(i => i.Command == "uruguay").Id},
+diff --git a/FPFI/Models/Entry2.cs b/FPFI/Models/Entry2.cs
+index 24c6900..bb051ca 100644
+--- a/FPFI/Models/Entry2.cs
++++ b/FPFI/Models/Entry2.cs
+@@ -40,7 +40,7 @@ namespace FPFI.Models
+ 
+     public enum Hfunc
+     {
+-        [Display(Name = "GUANARE")]
+-        GUANARE
++        [Display(Name = "Solid")]
++        SOLID
+     }
+ }
+diff --git a/FPFI/Models/Tree.cs b/FPFI/Models/Tree.cs
+index 23be2a5..1ca8063 100644
+--- a/FPFI/Models/Tree.cs
++++ b/FPFI/Models/Tree.cs
+@@ -49,10 +49,10 @@ namespace FPFI.Models
+         fds,
+         [Display(Name ="Uruguay Pulp",ShortName ="uruguay_pulp")]
+         uruguay_pulp,
+-        [Display(Name = "Uruguay Solid", ShortName = "uruguay_solid")]
+-        uruguay_solid,
+-        [Display(Name = "Uruguay Guanare", ShortName = "uruguay_guanare")]
+-        uruguay_guanare,
++        [Display(Name = "Uruguay Solid-1", ShortName = "uruguay_solid")]
++        uruguay_solid1,
++        [Display(Name = "Uruguay Solid-2", ShortName = "uruguay_solid2")]
++        uruguay_solid2,
+         [Display(Name = "Brazil MS", ShortName = "brazil_ms")]
+         brazil_ms,
+         [Display(Name = "Brazil RS", ShortName = "brazil_rs")]
+
+----------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------          
+---------------------- ACTUALIZANDO A ESTA LIBRERIA (0.7.5) DEJÓ DE FUNCIONAR, SIN CAMBIAR NADA EXTRA
+---------------------------------------------------------------------------------------------------------------------------------------- 
+commit 4ff93f09fec3d7ecad03ce13ce046be2ca4bef1a
+Author: alvarop <alvaro.paredes@fpfi.cl>
+Date:   Fri Oct 19 10:13:26 2018 -0300
+
+    Added R-library
+
+diff --git a/R_library/fpfi3_0.7.5.tar.gz b/R_library/fpfi3_0.7.5.tar.gz
+new file mode 100644
+index 0000000..f7b10b3
+Binary files /dev/null and b/R_library/fpfi3_0.7.5.tar.gz differ
+
+----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------- 
+commit 91cdef3b9fdbbc92c7c885afeff1443af010257d
+Author: alvarop <alvaro.paredes@fpfi.cl>
+Date:   Tue Oct 16 16:24:07 2018 -0300
+
+    permitiendo que los productos lleguen de VP6 a VP12??
+
+diff --git a/FPFI/Models/Product3.cs b/FPFI/Models/Product3.cs
+index 2cb5a2b..c76261b 100644
+--- a/FPFI/Models/Product3.cs
++++ b/FPFI/Models/Product3.cs
+@@ -25,6 +25,6 @@ namespace FPFI.Models
+ 
+     public enum Class
+     {
+-        VP1 = 1,VP2 = 2,VP3 = 3,VP4 = 4,VP5 = 5,VP6 = 6
++        VP1 = 1,VP2 = 2,VP3 = 3,VP4 = 4,VP5 = 5,VP6 = 6, VP7 = 7, VP8 = 8, VP9 = 9, VP10 = 10, VP11 = 11, VP12 = 12, VP13 = 13, VP14 = 14
+     }
+ }
+
+----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------- 
+commit 19f465060f5d144831a92644be1240a260927b0e
+Author: alvarop <alvaro.paredes@fpfi.cl>
+Date:   Wed Sep 5 11:29:40 2018 -0300
+
+    tercer intento
+
+diff --git a/FPFI/Models/Input.cs b/FPFI/Models/Input.cs
+index 6bc66cd..441be10 100644
+--- a/FPFI/Models/Input.cs
++++ b/FPFI/Models/Input.cs
+@@ -13,7 +13,7 @@ namespace FPFI.Models
+         public int Id_ { get; set; }
+ 
+         [Display(Name = "Macrostand",ShortName ="macrostand")]
+-        [RegularExpression(".", ErrorMessage = "The Field {0} should be a letter followed by a number")]
++        [RegularExpression(".+", ErrorMessage = "The Field {0} should be a letter followed by a number")]
+         public string Macrostand { get; set; }
+ 
+         [Display(Name = "P Year", ShortName = "pyear")]
+
+----------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------          
+commit a20d0905b089fded0595871e930a84073e0f76c4
+Author: alvarop <alvaro.paredes@fpfi.cl>
+Date:   Wed Sep 5 11:25:19 2018 -0300
+
+    evitando problemas con el macrostand, ahora si?
+
+diff --git a/FPFI/Models/Input.cs b/FPFI/Models/Input.cs
+index f0e6807..6bc66cd 100644
+--- a/FPFI/Models/Input.cs
++++ b/FPFI/Models/Input.cs
+@@ -13,7 +13,7 @@ namespace FPFI.Models
+         public int Id_ { get; set; }
+ 
+         [Display(Name = "Macrostand",ShortName ="macrostand")]
+-        //[RegularExpression("[A-Z]+[0-9]+", ErrorMessage = "The Field {0} should be a letter followed by a number")]
++        [RegularExpression(".", ErrorMessage = "The Field {0} should be a letter followed by a number")]
+         public string Macrostand { get; set; }
+ 
+         [Display(Name = "P Year", ShortName = "pyear")]
+
+----------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------          
+commit a64870eabacdb7a32da9c778e8af8e373811f108
+Author: alvarop <alvaro.paredes@fpfi.cl>
+Date:   Wed Sep 5 10:10:38 2018 -0300
+
+    pèrmite cualquier nombre en macrostand
+
+diff --git a/FPFI/Models/Input.cs b/FPFI/Models/Input.cs
+index 5fe5045..f0e6807 100644
+--- a/FPFI/Models/Input.cs
++++ b/FPFI/Models/Input.cs
+@@ -13,7 +13,7 @@ namespace FPFI.Models
+         public int Id_ { get; set; }
+ 
+         [Display(Name = "Macrostand",ShortName ="macrostand")]
+-        [RegularExpression("[A-Z]+[0-9]+", ErrorMessage = "The Field {0} should be a letter followed by a number")]
++        //[RegularExpression("[A-Z]+[0-9]+", ErrorMessage = "The Field {0} should be a letter followed by a number")]
+         public string Macrostand { get; set; }
+ 
+         [Display(Name = "P Year", ShortName = "pyear")]

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @RenderSection("Meta", required: false)
+    <title>@ViewData["Title"] - FPFI</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        @*<link rel="stylesheet" href="~/lib/bootstrap-select/dist/css/bootstrap-select.css" />*@
+        <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.css" />
+        @*<link rel="stylesheet" href="~/lib/bootstrap-toggle/css/bootstrap-toggle.css" />*@
+    </environment>
+    <environment exclude="Development">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46146363-5"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-46146363-5');
+        </script>
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+              asp-fallback-href="~/lib/fontawesome-free/css/all.min.css"
+              crossorigin="anonymous"
+              asp-fallback-test-class="fa-fw"
+              asp-fallback-test-property="text-align"
+              asp-fallback-test-value="center"
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" />
+        @*<link rel="stylesheet" href="~/lib/bootstrap-toggle/css/bootstrap-toggle.min.css" />*@
+    </environment>
+    @*<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' />*@
+    @*<style>
+            @@font-face {
+                font-family: Deutschlander;
+                src: url("/font/Deutschlander.eot");
+                src: url("/font/Deutschlander.ttf");
+            }
+        </style>*@
+    <partial name="_Favicons" />
+    @RenderSection("Styles", required: false)
+    @this.WriteStyleBlocks()
+</head>
+<body>
+    <header>
+        <partial name="_Nav" />
+        <partial name="_CookieConsentPartial" />
+    </header>
+    <main role="main">
+        <div class="body-content container-fluid">
+            @RenderBody()
+        </div>
+    </main>
+    <footer>
+        <div class="row container">
+            <div class="col-md-6">
+                <p>
+                    @*<a asp-controller="Home" asp-action="Manual">
+                            <i class="fas fa-info-circle fa-tw"></i> @Localizer["User Manual"]
+                        </a>*@
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p style="text-align:right;color:azure;">
+                    &copy; 2018 - FPFI
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js"></script>
+        @*<script src="~/lib/bootstrap-toggle/js/bootstrap-toggle.js"></script>*@
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        @*<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"
+                asp-fallback-src="~/lib/bootstrap-toggle/js/bootstrap-toggle.min.js"
+                crossorigin="anonymous"
+                integrity="sha256-eZNgBgutLI47rKzpfUji/dD9t6LRs2gI3YqXKdoDOmo=">
+        </script>*@
+    </environment>
+    @RenderSection("Scripts", required: false)
+    @this.WriteScriptBlocks()
+    @*@RenderSection("Scripts2", required: false)*@
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿@model FPFI.Models.Entry3
+@using FPFI.Models.ViewModels
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader
+{
+    Heading = "Entry: " + Model.Id 
+})
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeStart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgeStart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeEnd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgeEnd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Distribution)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Distribution)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DistributionThinning)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DistributionThinning)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Include_Thinning)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Include_Thinning)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Tree.Species.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tree.Species.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolumeFormula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolumeFormula)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ByClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ByClass)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Way)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Way)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tree.Region.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tree.Region.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stump)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stump)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MgDisc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MgDisc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LengthDisc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LengthDisc)
+        </dd>
+    </dl>
+</div>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true })

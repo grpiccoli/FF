@@ -1,0 +1,54 @@
+﻿@using FPFI.Models.ViewModels
+@model IEnumerable<ApplicationRoleListViewModel>
+
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Roles</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <a id="createRoleModal" data-toggle="modal" asp-action="AddEditApplicationRole" data-target="#modal-action" class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i>  A&ntilde;adir Rol
+            </a>
+        </div>
+        <div class="top-buffer"></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripci&oacute;n</th>
+                    <th>Usuarios</th>
+                    <th>Acci&oacute;n</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.RoleName</td>
+                        <td>@item.Description</td>
+                        <td>@item.NumberOfUsers</td>
+                        <td>
+                            <a id="addEditApplicationRoleModal" data-toggle="modal" asp-action="AddEditApplicationRole" asp-route-id="@item.ID" data-target="#modal-action"
+                                class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Editar
+                            </a>
+                            @if (item.NumberOfUsers == 0)
+                            {
+                                <a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.ID" data-target="#modal-action" class="btn btn-danger">
+                                    <i class="glyphicon glyphicon-trash"></i>  Eliminar
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", AreaLabeledId = "modal-action-label", Size = ModalSize.Medium })
+
+@section scripts
+{
+    <script src="~/js/modal-action.js" asp-append-version="true"></script>
+}

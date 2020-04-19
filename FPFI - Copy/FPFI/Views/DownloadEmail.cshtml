@@ -1,0 +1,26 @@
+﻿@model DownloadEmail
+@using FPFI.Models.ViewModels
+
+@{
+    var url = $"{Model.BaseUrl}/data/{Model.Date}-Entry_{Model.Id_}.zip";
+}
+@*@await Html.PartialAsync("_Icon")*@
+@*<img class="fix" src="cid:emailicon" width="70" height="70" border="0" alt="" />*@
+<h3>Dear @Model.Name,</h3>
+<br />
+The files you requested for your entry submition number <strong>@Model.Id_</strong> can be downloaded on the following link:
+<br />
+<a href='@url'>@url</a>
+<br />
+The password to open your files is: @Model.Password
+<br />
+Kind Regards,
+<br />
+<h4>FPFI Team</h4>
+<figure style="height:50px;position:absolute;top:0%;">
+    <div>
+        <svg viewBox="0 0 520 400" width="70"><use xlink:href="#svg2"></use></svg>
+    </div>
+</figure>
+<br />
+<p style='color:#f9f9f9'>@DateTime.Now</p>

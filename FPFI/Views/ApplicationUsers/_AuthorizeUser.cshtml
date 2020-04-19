@@ -1,0 +1,13 @@
+﻿@model AuthorizeVM
+@using FPFI.Models.ViewModels
+@{ 
+    var text = Model.Activated ? "Activated" : "Inactivated";
+}
+
+<form asp-action="DeleteUser" role="form">
+    <partial name="_ModalHeader" model='new ModalHeader { Heading = $"User {text}" }' />
+    <div class="modal-body form-horizontal">
+        User @Model.Name was @text
+    </div>
+    <partial name="_ModalFooter" model='new ModalFooter { OnlyCancelButton = true, CancelButtonText = "OK" }' />
+</form>

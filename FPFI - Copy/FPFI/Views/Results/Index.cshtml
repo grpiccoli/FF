@@ -1,0 +1,242 @@
+﻿@model ResultsViewModel
+@using FPFI.Models.ViewModels
+@{
+    ViewData["Title"] = "Results for " + Model.UserName + " entries";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/meter.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/outline-buttons.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/checklist-animation.css" type="text/css" />
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>@ViewData["Title"]</h2>
+        <h4>
+            Create New:
+            <br />
+            <a asp-controller="Entry2" asp-action="Step1">Entry2</a>
+            <br />
+            <a asp-controller="Entry3" asp-action="Step1">Entry3</a>
+        </h4>
+    </div>
+    <div class="panel-body">
+        @if (Model.Entries.Any())
+        {
+            if (Model.I.HasValue && Model.V.HasValue)
+            {
+                if (Model.Dl.HasValue && Model.Dl.Value)
+                {
+                    @section Scripts2
+                        {
+                        <script>
+                            $(document).ready(function () {
+                                        alert("@($"You should be recieving an email shortly with a link to download the requested files for entry {Model.I.Value}")");
+                                    });
+                        </script>
+                    }
+                }
+                else if (Model.Error)
+                {
+                    @Html.Partial("_StatusMessage",
+                                                   $@"ERROR: Entry{Model.V.Value} {Model.I.Value} Failed, Please refer to log to view error")
+                }
+                else
+                {
+                    if (Model.ProgressPercentage < 100)
+                    {
+                        var msg = $@"Your entry {Model.I.Value} has been submitted succesfully and will be processed shortly, we will send an email to <strong>{Model.Email}</strong> as soon as the results are available.
+<br />
+ATD: <strong>{Model.ATD}</strong> ETA: <strong>{Model.ETA}</strong>
+<br />";
+                        @section Scripts2{
+                            <script type="text/javascript" language="javascript">
+                                $(document).ready(function () {
+                                    function RefreshPartial() {
+                                        //this will wait x seconds and then fire the load partial function
+                                        setTimeout(function () {
+                                            $.get('@Url.Action("ProgressBar", "Results", new { id = Model.I.Value, v = Model.V.Value })', {}, function (response) {
+                                                $("#progress").html(response.progressBarPV);
+                                                $("#stage").html(response.stagePV);
+                                                if (parseInt($(".stageNumber").html()) < 7) {
+                                                    RefreshPartial();
+                                                } else {
+                                                    $("#downloadModal").first().attr("class", "btn btn-block success");
+                                                    $("#svgDetails").first().attr("class", "btn btn-block primary");
+                                                    $("#canvasDetails").first().attr("class", "btn btn-block primary");
+                                                    $("#running").attr("class","success");
+                                                    $("div.progress-bar").attr("class", "progress-bar progress-bar-success");
+                                                    $("#statusMsg").html("Finished! Email Sent");
+                                                }
+                                            });
+                                            //recall this function so that it will continue to loop
+                                        }, 4000);
+                                    }
+                                    //initialize the loop
+                                    RefreshPartial();
+                                });
+                            </script>
+                        }
+                        /**/
+                        @Html.Partial("_StatusMessage", msg)
+                        <div id="progress" class='progress'>
+                            <div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='@Model.ProgressPercentage' aria-valuemin='0' aria-valuemax='100' style='width:@Model.ProgressPercentage%'>
+                                @Model.ProgressPercentage%
+                            </div>
+                        </div>
+                    }
+                }
+            }
+
+            <table class="table table-striped dt-responsive" id="myTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Running2.Id)
+                        </th>
+                        <th>
+                            FPFI Version
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Running2.IP)
+                        </th>
+                        <th>
+                            Settings
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Running2.ProcessStart)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Running2.ProcessTime)
+                        </th>
+                        <th>
+                            Run Output
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Running2.Stage)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Entries)
+                    {
+                        var done = (item.Stage == Stage.EmailSent);
+                        <tr id="@(Model.I.HasValue && item.Id == Model.I.Value ? "running" : "")" class="@(done ? "" : "danger")">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Version)
+                            </td>
+                            <td>
+                                @if (item.IP == "::1")
+                                {
+                                    <text>Server</text>
+                                }
+                                else
+                                {
+                                    <a href="https://www.whois.com/whois/@item.IP">@Html.DisplayFor(modelItem => item.IP)</a>
+                                }
+                            </td>
+                            <td>
+                                <a id="settingsModal"
+                                   data-toggle="modal"
+                                   asp-action="Settings"
+                                   asp-route-id="@item.Id"
+                                   asp-route-ver="@item.Version"
+                                   data-target="#modal-action"
+                                   class="btn">
+                                    <i class="fas fa-eye fa-fw"></i>View
+                                </a>
+                            </td>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.ProcessStart)
+                            </th>
+                            <th>
+                                @if (item.ProcessTime.HasValue)
+    {
+                            <text>
+                                @(Math.Floor((double)(item.ProcessTime.Value / 60)))m:@(Math.Floor((double)(item.ProcessTime.Value % 60)))s
+                            </text>
+}
+else
+{
+                            <text>
+                                Processing&hellip;
+                            </text>
+}
+                            </th>
+                            <th>
+                                <a id="settingsModal"
+                                   data-toggle="modal"
+                                   asp-action="Output"
+                                   asp-route-id="@item.Id"
+                                   asp-route-ver="@item.Version"
+                                   data-target="#modal-action"
+                                   class="btn">
+                                    <i class="fas fa-eye fa-fw"></i>View
+                                </a>
+                            </th>
+                            <th id="@(Model.I.HasValue && item.Id == Model.I.Value ? "stage" : "")">
+                                @if (item.Stage == Stage.Error)
+                                {
+                                    <text>ERROR!:</text>
+                                }
+                                else
+                                {
+                                    <text>Stage <span class="stageNumber">@((int)item.Stage)</span> of 7:</text>
+                                }
+                                <br />
+                                @Html.DisplayFor(modelItem => item.Stage)
+                            </th>
+                            <td>
+                                <div class="btn-group-vertical">
+                                    <a id="downloadModal"
+                                       data-toggle="modal"
+                                       asp-action="Download"
+                                       asp-route-id="@item.Id"
+                                       asp-route-ver="@item.Version"
+                                       data-target="#modal-action"
+                                       class="btn btn-block success @(done ? "" : "hidden")">
+                                        <i class="fas fa-download fa-fw"></i>Download
+                                    </a>
+                                    <a id="svgDetails" href="@Url.Action("SvgGraphs", "Results", new { id = item.Id, v = item.Version })"
+                                       target="_blank"
+                                       class="btn btn-block primary @(done ? "" : "hidden")">
+                                        <img src="~/images/SVG_Logo.svg.png" height="20" /> Graphs
+                                    </a>
+                                    <a id="canvasDetails" href="@Url.Action("CanvasGraphs", "Results", new { id = item.Id, v = item.Version })"
+                                       target="_blank"
+                                       class="btn btn-block info @(done ? "" : "hidden")">
+                                        <img src="~/images/Html5_canvas_logo.png" height="20" /> Graphs
+                                    </a>
+                                    <a id="deleteModal"
+                                       data-toggle="modal"
+                                       asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       asp-route-ver="@item.Version"
+                                       data-target="#modal-action"
+                                       class="btn btn-block danger">
+                                        <i class="far fa-trash-alt fa-fw"></i>Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            @Html.Partial("_StatusMessage", "Error: No entries have been submitted yet, please create a new entry: <br/><a href=\"/Entry2/Step1\">Entry2</a><br/> <a href=\"/Entry3/Step1\">Entry3</a>")
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/modal-action.js" asp-append-version="true"></script>
+}
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", AreaLabeledId = "modal-action-label", Size = ModalSize.Medium })

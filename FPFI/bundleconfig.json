@@ -1,0 +1,168 @@
+﻿// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/background.min.css",
+    "inputFiles": [
+      "wwwroot/css/background.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/svgCharts.min.css",
+    "inputFiles": [
+      "wwwroot/css/svgCharts.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/step2.min.css",
+    "inputFiles": [
+      "wwwroot/css/step2.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/fineUploader.min.css",
+    "inputFiles": [
+      "wwwroot/css/fineUploader.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/icomoon/style.min.css",
+    "inputFiles": [
+      "wwwroot/lib/icomoon/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/checklist-animation.min.css",
+    "inputFiles": [
+      "wwwroot/css/checklist-animation.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery-ajax-unobtrusive/src/jquery.unobtrusive-ajax.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-ajax-unobtrusive/src/jquery.unobtrusive-ajax.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/d3.min.css",
+    "inputFiles": [
+      "wwwroot/css/d3.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/dinamicTable.min.css",
+    "inputFiles": [
+      "wwwroot/css/dinamicTable.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/home.min.css",
+    "inputFiles": [
+      "wwwroot/css/home.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/meter.min.css",
+    "inputFiles": [
+      "wwwroot/css/meter.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/outline-buttons.min.css",
+    "inputFiles": [
+      "wwwroot/css/outline-buttons.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/d3.v2.min.js",
+    "inputFiles": [
+      "wwwroot/js/d3.v2.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/d3legend.min.js",
+    "inputFiles": [
+      "wwwroot/js/d3legend.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/step2.min.js",
+    "inputFiles": [
+      "wwwroot/js/step2.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/fineUploader.min.js",
+    "inputFiles": [
+      "wwwroot/js/fineUploader.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/d3line.min.js",
+    "inputFiles": [
+      "wwwroot/js/d3line.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/d3linewithlegend.min.js",
+    "inputFiles": [
+      "wwwroot/js/d3linewithlegend.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/modal-action.min.js",
+    "inputFiles": [
+      "wwwroot/js/modal-action.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/addUser.min.js",
+    "inputFiles": [
+      "wwwroot/js/addUser.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/download.min.js",
+    "inputFiles": [
+      "wwwroot/js/download.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/editUser.min.js",
+    "inputFiles": [
+      "wwwroot/js/editUser.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/nvtooltip.min.js",
+    "inputFiles": [
+      "wwwroot/js/nvtooltip.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/zxcvbn/dist/zxcvbn.min.js",
+    "inputFiles": [
+      "wwwroot/lib/zxcvbn/dist/zxcvbn.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  }
+]

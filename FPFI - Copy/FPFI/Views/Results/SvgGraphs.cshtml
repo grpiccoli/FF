@@ -1,0 +1,323 @@
+﻿@model IEnumerable<FPFI.Models.Simulation>
+
+@{
+    ViewData["Title"] = "Results";
+
+    var layout = new List<string>
+{
+"Hd","N","Dg","Vt","CAI_Dg","CAI_Vt","MAI_Dg","MAI_Vt"
+};
+}
+
+<h2>Results</h2>
+
+@if (Model.Any())
+{
+    var sample = Model.FirstOrDefault();
+    @section Styles{
+        <link rel="stylesheet" href="~/lib/amcharts3/amcharts/plugins/export/export.css" type="text/css" media="all" />
+        <style>
+            .chartdiv {
+                width: 400px;
+                height: 300px;
+            }
+            .curtain {
+                width: 250px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                font-family: helvetica, arial, sans-serif;
+                text-transform: uppercase;
+                font-weight: 900;
+                color: #ce4233;
+                letter-spacing: 0.2em;
+            }
+
+                .curtain::before, .curtain::after {
+                    content: "";
+                    display: block;
+                    width: 15px;
+                    height: 15px;
+                    background: #ce4233;
+                    position: absolute;
+                    animation: load .7s infinite alternate ease-in-out;
+                }
+
+                .curtain::before {
+                    top: 0;
+                }
+
+                .curtain::after {
+                    bottom: 0;
+                }
+
+            @@keyframes load {
+                0% {
+                    left: 0;
+                    height: 30px;
+                    width: 15px
+                }
+
+                50% {
+                    height: 8px;
+                    width: 40px
+                }
+
+                100% {
+                    left: 235px;
+                    height: 30px;
+                    width: 15px
+                }
+            }
+            .title {
+                text-align: center;
+                color:cadetblue;
+            }
+            .value{
+                color: blue;
+            }
+        </style>
+    }
+    <div>
+        <h4>Results</h4>
+        <hr />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden Dg">Dg: <span class="value"></span></span></h3>
+                    <div id="Dg" class="chartdiv"></div>
+                    @*<div id="curtain1" class="curtain"><span>Loading...</span></div>*@
+                </div>
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden CAI_Dg">CAI_Dg: <span class="value"></span></span></h3>
+                    <div id="CAI_Dg" class="chartdiv"></div>
+                </div>
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden MAI_Dg">MAI_Dg: <span class="value"></span></span></h3>
+                    <div id="MAI_Dg" class="chartdiv"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden Vt">Vt: <span class="value"></span></span></h3>
+                    <div id="Vt" class="chartdiv"></div>
+                </div>
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden CAI_Vt">CAI_Vt: <span class="value"></span></span></h3>
+                    <div id="CAI_Vt" class="chartdiv"></div>
+                </div>
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden MAI_Vt">MAI_Vt: <span class="value"></span></span></h3>
+                    <div id="MAI_Vt" class="chartdiv"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden Hd">Hd: <span class="value"></span></span></h3>
+                    <div id="Hd" class="chartdiv"></div>
+                </div>
+                <div class="col-md-4 chartcontainer">
+                    <h3>&emsp;<span class="title hidden N">N: <span class="value"></span></span></h3>
+                    <div id="N" class="chartdiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+        <script src="~/lib/amcharts3/amcharts/amcharts.js"></script>
+        <script src="~/lib/amcharts3/amcharts/xy.js"></script>
+        <script src="~/lib/amcharts3/amcharts/plugins/export/export.min.js"></script>
+        <script src="~/lib/amcharts3/amcharts/themes/light.js"></script>
+        <script>
+            var chartConfig = {
+                "type": "xy",
+                "addClassNames": true,
+                "numberFormatter": {
+                    "precision": 2,
+                    "decimalSeparator": '.',
+                    "thousandsSeparator": ','
+                },
+                "marginRight": 40,
+                "marginLeft": 40,
+                "balloon": {
+                    "adjustBorderColor": false,
+                    //"shadowAlpha": 0,
+                    //"fixedPosition": true,
+                    //"drop": true,
+                    "color": "#ffffff",
+                    "borderThickness": 1,
+                },
+                "chartCursor": {
+                    "pan": true,
+                    "valueLineEnabled": true,
+                    "valueLineBalloonEnabled": true,
+                    "cursorAlpha": 1,
+                    "cursorColor": "#258cbb",
+                    "valueLineAlpha": 0.2,
+                    //"valueZoomable": true
+                },
+                "listeners": [{
+                    "event": "rollOverGraph",
+                    "method": function (e) {
+                        connect(e, "green", "black", "3", "3");
+                    }
+                },
+                {
+                    "event": "rollOutGraph",
+                    "method": function (e) {
+                        connect(e, "purple", "purple", "1", "0.001");
+                    }
+                },
+                {
+                    "event": "rollOverGraphItem",
+                    "method": function (e) {
+                        itemConnect(e);
+                    }
+                },
+                {
+                    "event": "rollOutGraphItem",
+                    "method": function (e) {
+                        var allCharts = AmCharts.charts;
+                        for (var i = 0; i < allCharts.length; i++) {
+                            allGraphs = allCharts[i].graphs;
+                            for (var c = 0; c < allGraphs.length; c++) {
+                                allGraphs[c].valueAxis.hideBalloon();
+                                allGraphs[c].xAxis.hideBalloon();
+                            }
+                        }
+                        $(".title").addClass("hidden");
+                    }
+                }],
+                "chartCursorSettings": {"valueBalloonsEnabled": true},
+                "export": {"enabled": true},
+            }
+            function itemConnect(e) {
+                var allCharts = AmCharts.charts;
+                var bullets = [];
+                var pre = new RegExp('^.*b>');
+                var post = new RegExp('<.*');
+
+                var macro = e.graph.balloonText.replace(pre, '').replace(post, '');
+                var selex = e.graph.x;
+                var age = e.item.dataContext.Age;
+                for (var i = 0; i < allCharts.length; i++) {
+                //allCharts[0].chartCursor.setPosition(2.146875, 7.048125);
+                //console.log(allCharts[0]);
+                    allGraphs = allCharts[i].graphs;
+                    for (var c = 0; c < allGraphs.length; c++) {
+                        bullets.push.apply(
+                            bullets,
+                            allGraphs[c].allBullets.filter(
+                                function (obj) {
+                                    if (obj.graphDataItem.graph.balloonText.replace(pre, '').replace(post, '') == macro && obj.graphDataItem.dataContext.Age == age) {
+                                        return true;
+                                    }
+                                    return false;
+                                }));
+                    }
+                }
+                bullets.forEach(function (bullet) {
+                    var y = ((bullet.graphDataItem.graph.yAxis.fullMax - bullet.graphDataItem.values.y) / (bullet.graphDataItem.graph.yAxis.fullMax - bullet.graphDataItem.graph.yAxis.fullMin)) * bullet.graphDataItem.graph.height;
+                    bullet.graphDataItem.graph.valueAxis.showBalloon(0, y, 0, 0);
+                    var x = (bullet.graphDataItem.values.x / bullet.graphDataItem.graph.xAxis.fullMax) * bullet.graphDataItem.graph.width;
+                    bullet.graphDataItem.graph.xAxis.showBalloon(x, 0, 0, 0);
+                    var title = $("." + bullet.graphDataItem.graph.yAxis.title);
+                    title.removeClass("hidden");
+                    title.find(".value").html(bullet.graphDataItem.values.y.toFixed(4));
+                });
+            }
+            function connect(g, l, b, lsz, bsz) {
+                var allCharts = AmCharts.charts;
+                var allGraphs = [];
+                for (var i = 0; i < allCharts.length; i++) {
+                    allGraphs.push.apply(allGraphs, allCharts[i].graphs.filter(function (obj) { return obj.yField == g.graph.yField; }));
+                }
+                allGraphs.forEach(function (graph) { setColor(graph, l, b, lsz, bsz); });
+            }
+
+            Array.prototype.match = function (needle) {
+                var response = [];
+                for (i in this) {
+                    if (needle.test(this[i])) {
+                        response.push.apply(response, i);
+                    }
+                }
+                return response;
+            }
+
+            function setColor(graph, line, bullet, lsz, bsz) {
+                var className = "amcharts-graph-" + graph.id;
+                var items = document.getElementsByClassName(className);
+                if (undefined === items) return;
+                for (var x in items) {
+                    if ("object" !== typeof items[x]) continue;
+                    var path = items[x].getElementsByTagName("path")[0];
+                    if (undefined !== path) {
+                        path.setAttribute("stroke-width", lsz);
+                        path.setAttribute("stroke", line);
+                    }
+                    var bullets = items[x].getElementsByClassName("amcharts-graph-bullet");
+                    for (var y in bullets) {
+                        if ("object" !== typeof bullets[y]) continue;
+                        bullets[y].setAttribute("fill", bullet);
+                        bullets[y].setAttribute("r", bsz);
+                    }
+                    var labels = items[x].getElementsByClassName("amcharts-graph-label");
+                    for (var y in labels) {
+                        if ("object" !== typeof labels[y]) continue;
+                    }
+                }
+            }
+            function clone(obj) {
+                var copy;
+                // Handle the 3 simple types, and null or undefined
+                if (null == obj || "object" != typeof obj) return obj;
+                // Handle Date
+                if (obj instanceof Date) {
+                    copy = new Date();
+                    copy.setTime(obj.getTime());
+                    return copy;
+                }
+                // Handle Array
+                if (obj instanceof Array) {
+                    copy = [];
+                    for (var i = 0, len = obj.length; i < len; i++) {
+                        copy[i] = clone(obj[i]);
+                    }
+                    return copy;
+                }
+                // Handle Object
+                if (obj instanceof Object) {
+                    copy = {};
+                    for (var attr in obj) {
+                        if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+                    }
+                    return copy;
+                }
+                throw new Error("Unable to copy obj! Its type isn't supported.");
+            }
+            //EDIT!!!!
+            @foreach(var i in layout)
+        {
+            @:var value = "@i";
+            @:var @("chartConfig"+i) = clone(chartConfig);
+            @("chartConfig" + i)@:.dataProvider = [@Html.Raw(ViewData[i] as string)];
+            @("chartConfig" + i)@:.graphs = [@Html.Raw(ViewData["Graphs"] as string)];
+            @("chartConfig" + i)@:.valueAxes = [{ "title": value }];
+            @:AmCharts.makeChart(@i, @Html.Raw("chartConfig" + i));
+        }
+
+        </script>
+    }
+}
+else
+{
+    @Html.Partial("_StatusMessage", "Error: Results will be shown here as soon as their ready")
+}
+<div>
+    <a asp-action="Index">Back to Submitted Entries</a>
+</div>

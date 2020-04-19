@@ -1,0 +1,72 @@
+﻿@model FPFI.Models.Entry2
+@using FPFI.Models.ViewModels
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader
+{
+    Heading = "Entry: " + Model.Id 
+})
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeStart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgeStart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeEnd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgeEnd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Distribution)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Distribution)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DistributionThinning)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DistributionThinning)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Deviation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Deviation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Species)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Species)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeightFunction)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeightFunction)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolumeFormula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolumeFormula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Way)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Way)
+        </dd>
+    </dl>
+</div>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true })

@@ -1,0 +1,14 @@
+﻿@using FPFI.Views.Entries2
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var Id = ViewContext.RouteData.Values["id"] != null ? ViewContext.RouteData.Values["id"].ToString() : null;
+    var activePage = ViewContext.ViewData["ActivePage"] as string;
+}
+
+<nav class="navbar btn-toolbar">
+    <div class="btn-group navbar-btn pull-right">
+        <a asp-action="@EntriesNavPages.PreviousStep(activePage)" asp-route-id="@Id" class="btn btn-default @EntriesNavPages.Previous(activePage)">Previous</a>
+        <input type="submit" form="@activePage" class="btn btn-default" value="@EntriesNavPages.Next(activePage)" />
+    </div>
+</nav>

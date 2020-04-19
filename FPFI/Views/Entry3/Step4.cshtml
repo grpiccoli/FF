@@ -1,0 +1,106 @@
+﻿@model FPFI.Models.Entry3
+
+@{
+    ViewData["Title"] = "4 Validate Products";
+    ViewData.AddActivePage(EntriesNavPages.Step4);
+    var prodview = Model.Products.FirstOrDefault();
+}
+
+@section Styles{
+    <style>
+        input {
+            padding: 10px;
+            align-self: center;
+        }
+    </style>
+}
+
+    <form id="Step4" asp-action="Step4" method="post" style="overflow:scroll">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" class="hidden" readonly />
+        <input asp-for="AgeStart" class="hidden" readonly />
+        <input asp-for="AgeEnd" class="hidden" readonly />
+        <table id="myTable" class="table table-striped dt-responsive">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(modelItem => prodview.X_1)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(modelItem => prodview.Diameter)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(modelItem => prodview.Length)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(modelItem => prodview.Value)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(modelItem => prodview.LogType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(modelItem => prodview.Class)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <input style="width:106px;"
+                               class="form-control dynamic"
+                               asp-for="@product.X_1"
+                               placeholder="@Html.DisplayFor(modelItem => product.X_1)" />
+                        <span asp-validation-for="Products.First().X_1" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input style="width:106px;"
+                               class="form-control dynamic"
+                               asp-for="@product.Diameter"
+                               placeholder="@Html.DisplayFor(modelItem => product.Diameter)" />
+                        <span asp-validation-for="Products.First().Diameter" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input style="width:106px;"
+                               class="form-control dynamic"
+                               asp-for="@product.Length"
+                               placeholder="@Html.DisplayFor(modelItem => product.Length)" />
+                        <span asp-validation-for="Products.First().Length" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input style="width:106px;"
+                               class="form-control dynamic"
+                               asp-for="@product.Value"
+                               placeholder="@Html.DisplayFor(modelItem => product.Value)" />
+                        <span asp-validation-for="Products.First().Value" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input style="width:106px;"
+                               class="form-control dynamic"
+                               asp-for="@product.LogType"
+                               placeholder="@Html.DisplayFor(modelItem => product.LogType)" />
+                        <span asp-validation-for="Products.First().LogType" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input style="width:106px;"
+                               class="form-control dynamic"
+                               asp-for="@product.Class"
+                               placeholder="@Html.DisplayFor(modelItem => product.Class)" />
+                        <span asp-validation-for="Products.First().Class" class="text-danger"></span>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </form>
+
+@section Scripts{
+    <script>
+        $("input.dynamic").keydown(
+            function () {
+                this.style.width = ((this.value.length * 8) + 50) + 'px';
+            }
+        );
+    </script>
+}

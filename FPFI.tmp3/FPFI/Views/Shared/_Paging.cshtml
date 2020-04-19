@@ -1,0 +1,74 @@
+﻿@model FPFI.Models.ViewModels.PagingPartial
+
+@{
+    var prevDisabled = Model.Pg == 1 ? "disabled" : "";
+    var nextDisabled = Model.Pg == Model.Last ? "disabled" : "";
+}
+
+<div class="btn-group btn-group-justified">
+    <a asp-controller="@Model.Controller"
+       asp-action="@Model.Action"
+       asp-route-srt="@Model.Srt"
+       asp-route-asc="@Model.Asc"
+       asp-route-rpp="@Model.Rpp"
+       asp-route-pg="1"
+       class="paging btn btn-default @prevDisabled">
+        &laquo;<text class="hidden-xs hidden-s hidden-sm"> First</text>
+    </a>
+    <a asp-controller="@Model.Controller"
+       asp-action="@Model.Action"
+       asp-route-srt="@Model.Srt"
+       asp-route-asc="@Model.Asc"
+       asp-route-rpp="@Model.Rpp"
+       asp-route-pg="@(Model.Pg-1)"
+       class="paging btn btn-default @prevDisabled">
+        &lsaquo;<text class="hidden-xs hidden-s hidden-sm"> Previous</text>
+    </a>
+    @{
+        int low = (Model.Pg > 5) ? Model.Pg - 4 : 1;
+        if (low > 1)
+        {
+            <a class="paging btn btn-default disabled"><text>&hellip;</text></a>
+        }
+        int high = (Model.Last > low + 8) ? low + 8 : Model.Last;
+    }
+    @for (int i = low; i <= high; i++)
+    {
+        var disabled = "";
+        if (i == Model.Pg)
+        {
+            disabled = "disabled";
+        }
+        <a asp-controller="@Model.Controller"
+           asp-action="@Model.Action"
+           asp-route-srt="@Model.Srt"
+           asp-route-asc="@Model.Asc"
+           asp-route-rpp="@Model.Rpp"
+           asp-route-pg="@i"
+           class="paging btn btn-default @disabled">
+            @i
+        </a>
+    }
+    @if (Model.Last > high)
+    {
+        <a class="paging btn btn-default disabled"><text>&hellip;</text></a>
+    }
+    <a asp-controller="@Model.Controller"
+       asp-action="@Model.Action"
+       asp-route-srt="@Model.Srt"
+       asp-route-asc="@Model.Asc"
+       asp-route-rpp="@Model.Rpp"
+       asp-route-pg="@(Model.Pg + 1)"
+       class="paging btn btn-default @nextDisabled">
+        <text class="hidden-xs hidden-s hidden-sm">Next </text>&rsaquo;
+    </a>
+    <a asp-controller="@Model.Controller"
+       asp-action="@Model.Action"
+       asp-route-srt="@Model.Srt"
+       asp-route-asc="@Model.Asc"
+       asp-route-rpp="@Model.Rpp"
+       asp-route-pg="@Model.Last"
+       class="paging btn btn-default @nextDisabled">
+        <text class="hidden-xs hidden-s hidden-sm">Last </text>&raquo;
+    </a>
+</div>

@@ -1,0 +1,89 @@
+﻿@model DownloadViewModel
+@using FPFI.Models.ViewModels
+
+<environment include="Development">
+    @this.StyleBlock(@<link rel="stylesheet" href="~/lib/icomoon/style.css" />)
+</environment>
+<environment exclude="Development">
+    @this.StyleBlock(@<link rel="stylesheet" href="~/lib/icomoon/style.min.css" asp-append-version="true" />)
+</environment>
+
+<form asp-action="Download" id="modal-form">
+    <partial name="_ModalHeader" model='new ModalHeader
+    {
+        Heading = "Choose all formats you wish to download for Entry " + Model.Id + " FPFI Version: " + Model.Version
+    }' />
+    <input class="hidden" asp-for="Id" />
+    <input class="hidden" asp-for="Version" />
+    <div class="modal-body">
+        <span id="checkboxVal" class="text-danger"></span>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <h1>
+                    <span class="icon-excel" style="text-align: center;">
+                        <span class="path1"></span><span class="path2"></span>
+                    </span>
+                </h1>
+                <span style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">XLSX</span>
+                <br />
+                <input class="hidden" asp-for="Xlsx" />
+                <div id="Xlsx" class="toggle add">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <h1>
+                    <span class="icon-xml">
+                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span>
+                    </span>
+                </h1>
+                <span style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">XML</span>
+                <br />
+                <input class="hidden" asp-for="Xml" />
+                <div id="Xml" class="toggle add">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <h1>
+                    <span class="icon-csv">
+                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                    </span>
+                </h1>
+                <span style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">CSV</span>
+                <br />
+                <input class="hidden" asp-for="Csv" />
+                <div id="Csv" class="toggle add">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-danger" id="FilesVal"></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <br />
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <meter min="0" max="4" id="password-strength-meter" value="0"></meter>
+                <p id="result"></p>
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <span id="PasswordVal" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <partial name="_ModalFooter" model='new ModalFooter { SubmitButtonText = "Request Download" }' />
+</form>
+
+@*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+<environment include="Development">
+    @this.StyleBlock(@<script src="~/lib/zxcvbn/dist/zxcvbn.js"></script>)
+    @this.StyleBlock(@<script src="~/js/download.js"></script>)
+</environment>
+<environment exclude="Development">
+    @this.StyleBlock(@<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"
+                              integrity="sha384-jhGcGHNZytnBnH1wbEM3KxJYyRDy9Q0QLKjE65xk+aMqXFCdvFuYIjzMWAAWBBtR" crossorigin="anonymous"
+                              asp-fallback-src="~/lib/zxcvbn/dist/zxcvbn.js"></script>)
+    @this.StyleBlock(@<script src="~/js/download.min.js" asp-append-version="true"></script>)
+</environment>

@@ -1,0 +1,89 @@
+﻿@model FPFI.Models.Input
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Input</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Macrostand" class="control-label"></label>
+                <input asp-for="Macrostand" class="form-control" />
+                <span asp-validation-for="Macrostand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pyear" class="control-label"></label>
+                <input asp-for="Pyear" class="form-control" />
+                <span asp-validation-for="Pyear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="N" class="control-label"></label>
+                <input asp-for="N" class="form-control" />
+                <span asp-validation-for="N" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BA" class="control-label"></label>
+                <input asp-for="BA" class="form-control" />
+                <span asp-validation-for="BA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dg" class="control-label"></label>
+                <input asp-for="Dg" class="form-control" />
+                <span asp-validation-for="Dg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="D100" class="control-label"></label>
+                <input asp-for="D100" class="form-control" />
+                <span asp-validation-for="D100" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hd" class="control-label"></label>
+                <input asp-for="Hd" class="form-control" />
+                <span asp-validation-for="Hd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vt" class="control-label"></label>
+                <input asp-for="Vt" class="form-control" />
+                <span asp-validation-for="Vt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Years" class="control-label"></label>
+                <input asp-for="Years" class="form-control" />
+                <span asp-validation-for="Years" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hp" class="control-label"></label>
+                <input asp-for="Hp" class="form-control" />
+                <span asp-validation-for="Hp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hm" class="control-label"></label>
+                <input asp-for="Hm" class="form-control" />
+                <span asp-validation-for="Hm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

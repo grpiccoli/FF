@@ -1,0 +1,74 @@
+﻿@model FPFI.Models.Entry2
+
+@{
+    ViewData["Title"] = "5 Validate Products";
+    ViewData.AddActivePage(EntriesNavPages.Step5);
+}
+
+@section Styles{
+    <style>
+        input {
+            padding: 10px;
+            align-self: center;
+        }
+    </style>
+}
+
+    <form id="Step5" asp-action="Step5" method="post" class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" class="hidden" readonly />
+        <input asp-for="AgeStart" class="hidden" readonly />
+        <input asp-for="AgeEnd" class="hidden" readonly />
+        <div class="form-group">
+            <label asp-for="Parameter.Beta1" class="col-md-3 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Parameter.Beta1" class="form-control" placeholder="Parameter.Beta1" />
+                <span asp-validation-for="Parameter.Beta1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Parameter.Beta2" class="col-md-3 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Parameter.Beta2" class="form-control" placeholder="Parameter.Beta2" />
+                <span asp-validation-for="Parameter.Beta2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Parameter.Beta3" class="col-md-3 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Parameter.Beta3" class="form-control" placeholder="Parameter.Beta3" />
+                <span asp-validation-for="Parameter.Beta3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Parameter.Beta4" class="col-md-3 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Parameter.Beta4" class="form-control" placeholder="Parameter.Beta4" />
+                <span asp-validation-for="Parameter.Beta4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Parameter.Alpha1" class="col-md-3 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Parameter.Alpha1" class="form-control" placeholder="Parameter.Alpha1" />
+                <span asp-validation-for="Parameter.Alpha1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Parameter.Alpha2" class="col-md-3 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Parameter.Alpha2" class="form-control" placeholder="Parameter.Alpha2" />
+                <span asp-validation-for="Parameter.Alpha2" class="text-danger"></span>
+            </div>
+        </div>
+    </form>
+
+@section Scripts{
+    <script>
+        $("input.dynamic").keydown(
+            function () {
+                this.style.width = ((this.value.length * 8) + 50) + 'px';
+            }
+        );
+    </script>
+}

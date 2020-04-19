@@ -1,0 +1,387 @@
+﻿@model IEnumerable<FPFI.Models.Entry2>
+@using FPFI.Models.ViewModels
+@{
+    ViewData["Title"] = "Submits by " + ViewData["User"];
+}
+
+@section Styles{
+    <style>
+        /* Green */
+        .btn-block {
+            min-width: 120px;
+        }
+
+        .primary {
+            border-color: steelblue;
+            color: steelblue;
+        }
+
+        .primary:hover {
+            background-color: steelblue;
+            color: white;
+        }
+
+        /* Green */
+        .success {
+            border-color: mediumseagreen;
+            color: mediumseagreen;
+        }
+
+        .success:hover {
+            background-color: mediumseagreen;
+            color: white;
+        }
+
+        /* Blue */
+        .info {
+            border-color: mediumturquoise;
+            color: mediumturquoise
+        }
+
+        .info:hover {
+            background: mediumturquoise;
+            color: white;
+        }
+
+        /* Orange */
+        .warning {
+            border-color: sandybrown;
+            color: sandybrown;
+        }
+
+        .warning:hover {
+            background: sandybrown;
+            color: white;
+        }
+
+        /* Red */
+        .danger {
+            border-color: red;
+            color: red
+        }
+
+        .danger:hover {
+            background: red;
+            color: white;
+        }
+
+        /* Gray */
+        .default {
+            border-color: black;
+            color: black;
+        }
+
+        .default:hover {
+            background: black;
+        }
+    </style>
+    <style>
+        .toggle, .add {
+            display: block;
+            position: absolute;
+            cursor: pointer;
+            width: 22px;
+            height: 22px;
+            top: 50%;
+            left: 50%;
+            margin: -11px 0 0 -11px;
+            border-radius: 11px;
+            transition: all 0.2s;
+        }
+
+        /*--------------toggle icon shapes------------*/
+        .toggle span {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background-color: #c3d1e0;
+            width: 10px;
+            height: 3px;
+            margin: -2px 0 0 -5px;
+            transition: all 0.2s;
+            border-radius: 1px;
+        }
+
+        /*-----------------plus colors----------------*/
+        .add {
+            background: #5e6e7f;
+        }
+
+        .add:hover {
+            background: #8096ad;
+        }
+
+        .add:hover span {
+            background: #d5e4f5;
+        }
+
+        /*----------------check colors----------------*/
+        .toggle.added, .toggle.added.just-added:hover {
+            background-color: #2c81b0;
+        }
+
+        .toggle.added span, .toggle.added.just-added:hover span {
+            background-color: #b7e7ff;
+        }
+
+        /*-----------------minus colors---------------*/
+        .toggle.added:hover {
+            background: #d84c34;
+        }
+
+        .toggle.added:hover span {
+            background: #fbc0b7;
+        }
+
+        /*---------------------plus-------------------*/
+        .add span:last-child, .toggle.added.just-added:hover span:last-child {
+            transform: rotate(90deg);
+        }
+
+        /*----------transform plus to check-----------*/
+        .toggle.added span:first-child, .toggle.added.just-added:hover span:first-child {
+            transform: rotate(-135deg) translate(0px, -1px);
+            width: 7px;
+        }
+
+        .toggle.added span:last-child, .toggle.added.just-added:hover span:last-child {
+            transform: rotate(-45deg) translate(1px, 1px);
+            width: 11px;
+        }
+
+        /*----------transform check to minus----------*/
+        .toggle.added:hover span:first-child {
+            transform: rotate(180deg) translate(0px, 0);
+            width: 6px;
+        }
+
+        .toggle.added:hover span:last-child {
+            transform: rotate(-180deg) translate(-2px, 0);
+            width: 6px;
+        }
+    </style>
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>@ViewData["Title"]</h2>
+        <h4>
+            <a asp-controller="Entries" asp-action="Step1">Create New Entry</a>
+        </h4>
+    </div>
+    <div class="panel-body">
+        @if (Model.Any())
+        {
+            var id = ViewData["id"];
+            if (id != null)
+            {
+                var m = Model.FirstOrDefault(a => a.Id == Convert.ToInt32(id));
+
+                if ((ViewData["Download"] as bool?).HasValue && (ViewData["Download"] as bool?).Value)
+                {
+                    @section Scripts2
+                    {
+                        <script>
+                            $(document).ready(function () {
+                                alert("@($"You should be recieving an email shortly with a link to download the requested files for entry {id}")");
+                            });
+                        </script>
+                    }
+                }
+                else if (m.Stage == Stage.Error)
+                {
+                    @Html.Partial("_StatusMessage",
+                                  $@"ERROR: Entry {id} Failed, Please refer to log to view error")
+                }
+                else
+                {
+                    var email = ViewData["email"];
+                    var atd = m.ProcessStart;
+                    var per = Math.Round((double)100 * (int)m.Stage / 7);
+                    if (per < 100)
+                    {
+                        var msg = $@"Your entry {id} has been submitted succesfully and will be processed shortly, we will send an email to <strong>{email}</strong> as soon as the results are available.
+<br />
+ATD: <strong>{atd}</strong> ETA: <strong></strong>
+<br />";
+                        @section Scripts2{
+                            <script type="text/javascript" language="javascript">
+                                $(document).ready(function () {
+                                    function RefreshPartial() {
+                                        //this will wait x seconds and then fire the load partial function
+                                        setTimeout(function () {
+                                            $.get('@Url.Action("ProgressBar", "Results", new { id = id })', {}, function (response) {
+                                                $("#progress").html(response.progressBarPV);
+                                                $("#stage").html(response.stagePV);
+                                                if (parseInt($(".stageNumber").html()) < 7) {
+                                                    RefreshPartial();
+                                                } else {
+                                                    $("#downloadModal").first().attr("class", "btn btn-block success");
+                                                    $("#svgDetails").first().attr("class", "btn btn-block primary");
+                                                    $("#canvasDetails").first().attr("class", "btn btn-block primary");
+                                                    $("#running").attr("class","");
+                                                    $("div.progress-bar").attr("class", "progress-bar progress-bar-success");
+                                                    $("#statusMsg").html("Finished! Email Sent");
+                                                }
+                                            });
+                                            //recall this function so that it will continue to loop
+                                        }, 4000);
+                                    }
+                                    //initialize the loop
+                                    RefreshPartial();
+                                });
+                            </script>
+                        }
+                        /**/
+                        @Html.Partial("_StatusMessage", msg)
+                            <div id="progress" class='progress'>
+                                <div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='14' aria-valuemin='0' aria-valuemax='100' style='width:14%'>
+                                    14%
+                                </div>
+                            </div>
+                    }
+                }
+            }
+
+    <table class="table table-striped dt-responsive" id="myTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IP)
+                </th>
+                <th>
+                    Settings
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProcessStart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProcessTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Output)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stage)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+        {
+            var done = (item.Stage == Stage.EmailSent);
+            <tr id="@(id != null && item.Id == (int)id ? "running" : "")" class="@(done ? "" : "danger")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @if (item.IP == "::1")
+                {
+                    <text>Server</text>
+            }
+            else
+            {
+                <a href="https://www.whois.com/whois/@item.IP">@Html.DisplayFor(modelItem => item.IP)</a>
+        }
+                </td>
+                <td>
+                    <a id="settingsModal"
+                       data-toggle="modal"
+                       asp-action="Settings"
+                       asp-route-id="@item.Id"
+                       data-target="#modal-action"
+                       class="btn">
+                        <i class="fas fa-eye fa-fw"></i>View
+                    </a>
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.ProcessStart)
+                </th>
+                <th>
+                    @if (item.ProcessTime.HasValue)
+                {
+                    <text>
+                        @Math.Floor((double)item.ProcessTime.Value / 360000)h:@(Math.Floor((double)(item.ProcessTime.Value % 360000) / 6000))m
+                    </text>
+            }
+            else
+            {
+                <text>
+                    Processing&hellip;
+                </text>
+        }
+                </th>
+                <th>
+                    <a id="settingsModal"
+                       data-toggle="modal"
+                       asp-action="Output"
+                       asp-route-id="@item.Id"
+                       data-target="#modal-action"
+                       class="btn">
+                        <i class="fas fa-eye fa-fw"></i>View
+                    </a>
+                </th>
+                <th id="@(item.Id == Convert.ToInt32(id) ? "stage" : "")">
+                    @if (item.Stage == Stage.Error)
+                {
+                    <text>ERROR!:</text>
+            }
+            else
+            {
+                <text>Stage <span class="stageNumber">@((int)item.Stage)</span> of 7:</text>
+        }
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Stage)
+                </th>
+                <td>
+                    <div class="btn-group-vertical">
+                        <a id="downloadModal"
+                           data-toggle="modal"
+                           asp-action="Download"
+                           asp-route-id="@item.Id"
+                           data-target="#modal-action"
+                           class="btn btn-block success @(done ? "" : "hidden")">
+                            <i class="fas fa-download fa-fw"></i>Download
+                        </a>
+                        <a id="svgDetails" href="@Url.Action("SubmitDetails", "Results", new { id = item.Id })"
+                           target="_blank"
+                           class="btn btn-block primary @(done ? "" : "hidden")">
+                            <img src="~/images/SVG_Logo.svg.png" height="20" /> Graphs
+                        </a>
+                        <a id="canvasDetails" href="@Url.Action("SubmitDetails2", "Results", new { id = item.Id })"
+                           target="_blank"
+                           class="btn btn-block info @(done ? "" : "hidden")">
+                            <img src="~/images/Html5_canvas_logo.png" height="20" /> Graphs
+                        </a>
+                        <a id="deleteModal"
+                           data-toggle="modal"
+                           asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           data-target="#modal-action"
+                           class="btn btn-block danger">
+                            <i class="far fa-trash-alt fa-fw"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}
+else
+{
+    @Html.Partial("_StatusMessage", "Error: No entries have been submitted yet, please <a href=\"/Entries/Step1\">create a new entry</a>")
+}
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/modal-action.js" asp-append-version="true"></script>
+}
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", AreaLabeledId = "modal-action-label", Size = ModalSize.Medium })

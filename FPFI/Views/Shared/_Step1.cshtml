@@ -1,0 +1,56 @@
+﻿@model FPFI.Models.Entry
+@using FPFI.Extensions
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input asp-for="Id" class="hidden" readonly />
+<div class="form-group">
+    <label asp-for="Description" class="col-md-3 control-label" title="@(Display.GetAttribute<Entry>("Distribution","Description"))"></label>
+    <div class="col-md-5">
+        <input class="form-control" asp-for="Description" placeholder="@(Display.GetAttribute<Entry>("Description","Description"))" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-3 control-label" title="@(Display.GetAttribute<Entry>("AgeStart","Description"))">Age</label>
+    <div class="col-md-2">
+        <input asp-for="AgeStart" class="form-control" placeholder="@Model.AgeStart" />
+        <span asp-validation-for="AgeStart" class="text-danger"></span>
+    </div>
+    <div class="col-md-1 control-label">
+        <text>&mdash;</text>
+    </div>
+    <div class="col-md-2">
+        <input asp-for="AgeEnd" class="form-control" placeholder="@Model.AgeEnd" />
+        <span asp-validation-for="AgeEnd" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Distribution" class="col-md-3 control-label" title="@(Display.GetAttribute<Entry>("Distribution","Description"))"></label>
+    <div class="col-md-5">
+        <select class="form-control" asp-for="Distribution" asp-items="ViewBag.Dist"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="DistributionThinning" class="col-md-3 control-label" title="@(Display.GetAttribute<Entry>("DistributionThinning","Description"))"></label>
+    <div class="col-md-5">
+        <select class="form-control" asp-for="DistributionThinning" asp-items="ViewBag.Dist"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Model" class="col-md-3 control-label" title="@(Display.GetAttribute<Entry>("Model","Description"))"></label>
+    <div class="col-md-5">
+        <select class="form-control" asp-for="Model" asp-items="ViewBag.Model"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="VolumeFormula" class="col-md-3 control-label" title="@(Display.GetAttribute<Entry>("VolumeFormula","Description"))"></label>
+    <div class="col-md-5">
+        <select class="form-control" asp-for="VolumeFormula" asp-items="ViewBag.Vform"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Way" class="col-md-3 control-label" title="@(Display.GetAttribute<Entry>("Way","Description"))"></label>
+    <div class="col-md-5">
+        <select class="form-control" asp-for="Way" asp-items="ViewBag.Way"></select>
+    </div>
+</div>

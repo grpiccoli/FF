@@ -1,0 +1,11 @@
+﻿@model string
+@using FPFI.Models.ViewModels
+
+<form asp-action="DeleteApplicationRole" role="form">
+    @Html.Partial("_ModalHeader", new ModalHeader { Heading = "Delete Role" })
+
+    <div class="modal-body form-horizontal">
+        Are you sure you want to eliminate the @Model role?
+    </div>
+    @Html.Partial("_ModalFooter", new ModalFooter { SubmitButtonText = "Delete" })
+</form>

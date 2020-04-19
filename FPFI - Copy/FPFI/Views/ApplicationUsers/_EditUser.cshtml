@@ -1,0 +1,75 @@
+﻿@model EditUserViewModel
+@using FPFI.Models.ViewModels
+
+<form asp-action="EditUser" role="form">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "Edit User" })
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="Email" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="form-group">
+                <label asp-for="UserClaims" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @for (int i = 0; i < Model.UserClaims.Count; i++)
+                    {
+                        <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
+                            <input type="checkbox" asp-for="@Model.UserClaims[i].Selected" />
+                            <label asp-for="@Model.UserClaims[i].Selected">@Model.UserClaims[i].Text</label>
+                            <input type="hidden" asp-for="@Model.UserClaims[i].Value" />
+                            <input type="hidden" asp-for="@Model.UserClaims[i].Text" />
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-danger">
+                    <span asp-validation-for="UserClaims"></span>
+                    <span id="UserClaimsVal"></span>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="form-group">
+                <label asp-for="ApplicationRoleID" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <select asp-for="ApplicationRoleID"
+                            title="Please select a @Html.DisplayNameFor(model => model.ApplicationRoleID)"
+                            asp-items="@Model.ApplicationRoles"
+                            class="selectpicker form-control"></select>
+                    <span asp-validation-for="ApplicationRoles" class="text-danger"></span>
+                    <span id="ApplicationRolesVal" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
+</form>
+
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(document).ready(function () {
+        $(".selectpicker").selectpicker();
+    });
+    $(function () {
+        //Change the button control here
+        $("form#modal-form").submit(function (e) {
+            //check if checked count is equal to zero
+            var stop = false;
+            if ($("input[type=checkbox]:checked").length === 0) {
+                //Then display the message
+                $("span#UserClaimsVal").html("Please select at least one User Claim");
+                stop = true;
+            }
+            if ($(".bootstrap-select").find("li.selected").length == 0) {
+                $("span#ApplicationRolesVal").html("Please select a Role");
+                stop = true;
+            }
+            if (stop) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>

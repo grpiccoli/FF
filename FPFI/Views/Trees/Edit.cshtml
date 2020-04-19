@@ -1,0 +1,45 @@
+﻿@model FPFI.Models.Tree
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Tree</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="SpeciesId" class="control-label"></label>
+                <select asp-for="SpeciesId" asp-items="ViewBag.Species" class="form-control" />
+                <span asp-validation-for="SpeciesId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegionId" class="control-label"></label>
+                <select asp-for="RegionId" asp-items="ViewBag.Regions" class="form-control" />
+                <span asp-validation-for="RegionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Default" class="control-label"></label>
+                <input type="checkbox" asp-for="Default" class="form-control" />
+                <span asp-validation-for="Default" class="text-danger"></span>
+                <span>Current default: @((string)ViewData["Default"])</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

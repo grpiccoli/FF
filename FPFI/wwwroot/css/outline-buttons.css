@@ -1,0 +1,68 @@
+﻿/* Green */
+.btn-block {
+    min-width: 120px;
+}
+
+.primary {
+    border-color: steelblue;
+    color: steelblue;
+}
+
+    .primary:hover {
+        background-color: steelblue;
+        color: white;
+    }
+
+/* Green */
+.success {
+    border-color: mediumseagreen;
+    color: mediumseagreen;
+}
+
+    .success:hover {
+        background-color: mediumseagreen;
+        color: white;
+    }
+
+/* Blue */
+.info {
+    border-color: mediumturquoise;
+    color: mediumturquoise
+}
+
+    .info:hover {
+        background: mediumturquoise;
+        color: white;
+    }
+
+/* Orange */
+.warning {
+    border-color: sandybrown;
+    color: sandybrown;
+}
+
+    .warning:hover {
+        background: sandybrown;
+        color: white;
+    }
+
+/* Red */
+.danger {
+    border-color: red;
+    color: red
+}
+
+    .danger:hover {
+        background: red;
+        color: white;
+    }
+
+/* Gray */
+.default {
+    border-color: black;
+    color: black;
+}
+
+    .default:hover {
+        background: black;
+    }

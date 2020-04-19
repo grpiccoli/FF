@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-FPFI-EAF50A55-D601-4F0C-9316-966A77463CDD</UserSecretsId>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20181030234845_Initial.cs" />
+    <Compile Remove="Migrations\20181030234845_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20181031013004_Initial.cs" />
+    <Compile Remove="Migrations\20181031013004_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20181118173829_NA.cs" />
+    <Compile Remove="Migrations\20181118173829_NA.Designer.cs" />
+    <Compile Remove="Migrations\20181118182014_NA2.cs" />
+    <Compile Remove="Migrations\20181118182014_NA2.Designer.cs" />
+    <Compile Remove="Migrations\20181119045402_Initial.cs" />
+    <Compile Remove="Migrations\20181119045402_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20181120190939_Second.cs" />
+    <Compile Remove="Migrations\20181120190939_Second.Designer.cs" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
+    <PackageReference Include="Sendgrid" Version="9.10.0" />
+  </ItemGroup>
+
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <Exec Command="dotnet bundle" />
+  </Target>
+    
+  <ItemGroup>
+    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.8.391" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include=".well-known\**" CopyToPublishDirectory="PreserveNewest" LinkBase=".well-known" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="site.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="site.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Entry3\Step2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Results\SvgGraphs2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>

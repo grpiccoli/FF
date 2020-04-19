@@ -1,0 +1,76 @@
+﻿<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="padding:0;">
+                <img src="~/images/logo_trazadofpfi.min.png" alt="fpfi icon" style="height:45px;" />
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-wrench fa-fw"></i>Tools<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @*@if (User.Identity.IsAuthenticated)
+                            {*@
+                        <li role="separator" class="divider"></li>
+                        @*@if (User.Claims.Any(c => c.Value == "Apps"))
+                            {*@
+                        <li class="dropdown-header">FPFI2:</li>
+                        <li><a asp-area="" asp-controller="Entry2" asp-action="Step1">Submit new Entry</a></li>
+                        <li class="dropdown-header">FPFI3:</li>
+                        <li><a asp-area="" asp-controller="Entry3" asp-action="Step1">Submit new Entry</a></li>
+                        <li class="dropdown-header">Results:</li>
+                        <li><a asp-area="" asp-controller="Results" asp-action="Index">Results</a></li>
+                        @*}
+                            }
+                            else
+                            {
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Register or Login to view tools:</li>
+                                <li><a asp-area="" asp-controller="Account" asp-action="Login"><i class="fa fa-sign-in-alt fa-fw" aria-hidden="true"></i>Login</a></li>
+                                <li><a asp-area="" asp-controller="Account" asp-action="Register"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>Register</a></li>
+                            }*@
+                    </ul>
+                </li>
+            </ul>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Editor") || User.IsInRole("Guest"))
+            {
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-cog"></i> Admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu hover">
+                            <li class="dropdown-header">Data Bases:</li>
+                            @if (User.Claims.Any(c => c.Value == "Data"))
+                            {
+                                <li><a asp-area="" asp-controller="Entry2" asp-action="Index">Entries 2</a></li>
+                                <li><a asp-area="" asp-controller="Entry3" asp-action="Index">Entries 3</a></li>
+                                <li><a asp-area="" asp-controller="Regions" asp-action="Index">Regions</a></li>
+                                <li><a asp-area="" asp-controller="Species" asp-action="Index">Species</a></li>
+                                <li><a asp-area="" asp-controller="Trees" asp-action="Index">Species-Regions</a></li>
+                            }
+                            @if (User.Claims.Any(c => c.Value == "Users"))
+                            {
+                                <li class="divider" role="separator"></li>
+                                <li class="dropdown-header">User and Roles:</li>
+                                <li><a asp-area="" asp-controller="ApplicationUsers" asp-action="Index">Users</a></li>
+                                <li><a asp-area="" asp-controller="ApplicationRoles" asp-action="Index">Roles</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            }
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </div>
+</nav>

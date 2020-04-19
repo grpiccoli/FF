@@ -1,0 +1,35 @@
+﻿.author {
+    text-align: right
+}
+
+.quote {
+    text-align: justify
+}
+
+.icon-comment-shadow {
+    /*filter: drop-shadow(8px 2px 2px rgba(0,0,0,0.7));*/
+}
+
+.text {
+    color: black;
+}
+
+body {
+    background-color: #EEE;
+    /*background-image: url("/images/forests-sky-foliage-from-the-bottom-of-the-623012.jpeg");*/
+    background-image: url("/images/forests-sky-foliage-from-the-bottom-of-the-62301.min.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.jumbotron {
+    background-color: #EEE;
+    background-image: url("/images/wood-forest-fire-fireplace-washed.min.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin-top:10px;
+}

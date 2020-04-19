@@ -1,0 +1,11 @@
+﻿@model string
+@using FPFI.Models.ViewModels
+
+<form asp-action="DeleteUser" role="form">
+    <partial name="_ModalHeader" model='new ModalHeader { Heading = "Delete User" }' />
+
+    <div class="modal-body form-horizontal">
+        Are you sure you want delete user @Model?
+    </div>
+    <partial name="_ModalFooter" model='new ModalFooter { SubmitButtonText = "Delete" }' />
+</form>

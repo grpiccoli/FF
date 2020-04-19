@@ -1,0 +1,12 @@
+﻿@model Stage
+@using FPFI.Services;
+@if (Model == Stage.Error)
+{
+    <text>ERROR!:</text>
+}
+else
+{
+    <text>Stage <span class="stageNumber">@((int)Model)</span> of 7:</text>
+}
+<br />
+@Model.GetDisplayName()

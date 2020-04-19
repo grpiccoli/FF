@@ -1,0 +1,106 @@
+﻿@model UserViewModel
+@using FPFI.Models.ViewModels
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/lib/bootstrap-select/dist/css/bootstrap-select.css" />
+</environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/css/bootstrap-select.min.css"
+          asp-fallback-href="~/css/bootstrap-select.min.css"
+          crossorigin="anonymous"
+          asp-fallback-test-class="bs-donebutton"
+          asp-fallback-test-property="float"
+          asp-fallback-test-value="left"
+          integrity="sha384-VIL6DOi0abWGW+PZ1rFVoA2WatU240bS9tuKRrp9b7P4b2WXk6dGH6cv7ke0u1C3" />
+</environment>
+
+<form asp-action="AddUser" role="form" id="modal-form">
+    <partial name="_ModalHeader" model='new ModalHeader { Heading = "Add User" }' />
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="Name" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="form-group">
+                <label asp-for="Email" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="form-group">
+                <label asp-for="ApplicationRoleID" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <select asp-for="ApplicationRoleID"
+                            title="Please select a @Html.DisplayNameFor(model => model.ApplicationRoleID)"
+                            asp-items="@Model.ApplicationRoles"
+                            class="selectpicker form-control"></select>
+                    <span asp-validation-for="ApplicationRoles" class="text-danger"></span>
+                    <span id="ApplicationRolesVal" class="text-danger"></span>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="form-group">
+                <label asp-for="UserClaims" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-9 col-md-12 col-sm-9 col-xs-12">
+                    @for (int i = 0; i < Model.UserClaims.Count; i++)
+                    {
+                        <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
+                            <input type="checkbox" asp-for="@Model.UserClaims[i].Selected" />
+                            <label asp-for="@Model.UserClaims[i].Selected">@Model.UserClaims[i].Text</label>
+                            <input type="hidden" asp-for="@Model.UserClaims[i].Value" />
+                            <input type="hidden" asp-for="@Model.UserClaims[i].Text" />
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-danger">
+                    <span asp-validation-for="UserClaims"></span>
+                    <span id="UserClaimsVal"></span>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="form-group">
+                <label asp-for="Password" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input asp-for="Password" class="form-control" />
+                    <meter min="0" max="4" id="password-strength-meter" value="0"></meter>
+                    <p id="result"></p>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span id="PasswordVal"></span>
+                </div>
+            </div>
+            <br /><br /><br />
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label"></label>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="_ModalFooter" model='new ModalFooter { }' />
+</form>
+
+<partial name="_ValidationScriptsPartial" />
+<environment include="Development">
+    @this.ScriptBlock(@<script src="~/lib/bootstrap-select/dist/js/bootstrap-select.js"></script>)
+    @this.ScriptBlock(@<script src="~/lib/zxcvbn/dist/zxcvbn.js"></script>)
+    @this.ScriptBlock(@<script src="~/js/addUser.js"></script>)
+</environment>
+<environment exclude="Development">
+    @this.ScriptBlock(@<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/js/bootstrap-select.min.js"
+                               asp-fallback-src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js"
+                               integrity="sha384-ygT2mviw2yCDz5zAzQ0pDthjJ+31/ixm6bFYumXyWXOrkH05DlpYy5FOJfUg0Z87"
+                               crossorigin="anonymous"></script>)
+    @this.ScriptBlock(@<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"
+                               integrity="sha384-jhGcGHNZytnBnH1wbEM3KxJYyRDy9Q0QLKjE65xk+aMqXFCdvFuYIjzMWAAWBBtR" crossorigin="anonymous"
+                               asp-fallback-src="~/lib/zxcvbn/dist/zxcvbn.js"></script>)
+    @this.ScriptBlock(@<script src="~/js/addUser.min.js" asp-append-version="true"></script>)
+</environment>

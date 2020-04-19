@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FPFI.Models.Input>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Macrostand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pyear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.N)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dg)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.D100)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Years)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hm)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Macrostand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pyear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.N)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.D100)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Years)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hm)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

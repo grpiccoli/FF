@@ -1,0 +1,13 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "amcharts3": "3.21.12",
+    "plotly.js": "v1.35.2",
+    "jquery-ajax-unobtrusive": "jquery.unobtrusive-ajax#v3.2.4",
+    "bootstrap-select": "v1.12.4"
+  },
+  "resolutions": {
+    "plotly.js": "v1.35.2"
+  }
+}

@@ -1,0 +1,96 @@
+﻿@model FPFI.Models.Entry3
+
+@{
+    ViewData["Title"] = "1 Configure";
+    ViewData.AddActivePage(EntriesNavPages.Step1);
+}
+
+<form id="Step1" asp-action="Step1" method="post" class="form-horizontal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Id" class="hidden" readonly />
+    <div class="form-group">
+        <label class="col-md-3 control-label">Age</label>
+        <div class="col-md-2">
+            <input asp-for="AgeStart" class="form-control" placeholder="@Model.AgeStart" />
+            <span asp-validation-for="AgeStart" class="text-danger"></span>
+        </div>
+        <div class="col-md-1 control-label">
+            <text>&mdash;</text>
+        </div>
+        <div class="col-md-2">
+            <input asp-for="AgeEnd" class="form-control" placeholder="@Model.AgeEnd" />
+            <span asp-validation-for="AgeEnd" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Distribution" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <select class="form-control" asp-for="Distribution" asp-items="ViewBag.Dist"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DistributionThinning" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <select class="form-control" asp-for="DistributionThinning" asp-items="ViewBag.Dist"></select>
+        </div>
+    </div>
+    @*<div class="form-group">
+        <label asp-for="Include_Thinning" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Include_Thinning" class="form-control" />
+            <span asp-validation-for="Include_Thinning" class="text-danger"></span>
+        </div>
+    </div>*@
+    <div class="form-group">
+        <label asp-for="TreeId" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            @Html.DropDownList("TreeId", (IEnumerable<SelectListItem>)ViewBag.TreeID, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Model" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <select class="form-control" asp-for="Model" asp-items="ViewBag.Model"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="VolumeFormula" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <select class="form-control" asp-for="VolumeFormula" asp-items="ViewBag.Vform"></select>
+        </div>
+    </div>
+    @*<div class="form-group">
+        <label asp-for="ByClass" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="ByClass" class="form-control" />
+            <span asp-validation-for="ByClass" class="text-danger"></span>
+        </div>
+    </div>*@
+    <div class="form-group">
+        <label asp-for="Way" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <select class="form-control" asp-for="Way" asp-items="ViewBag.Way"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Stump" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Stump" class="form-control" placeholder="@Model.Stump" />
+            <span asp-validation-for="Stump" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="MgDisc" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="MgDisc" class="form-control" placeholder="@Model.MgDisc" />
+            <span asp-validation-for="MgDisc" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="LengthDisc" class="col-md-3 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="LengthDisc" class="form-control" placeholder="@Model.LengthDisc" />
+            <span asp-validation-for="LengthDisc" class="text-danger"></span>
+        </div>
+    </div>
+</form>

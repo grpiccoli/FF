@@ -1,0 +1,155 @@
+﻿@model IEnumerable<FPFI.Models.Input3>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DBH_sd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DBH_max)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Random_SI)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Random_BA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id_)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Macrostand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pyear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.N)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dg)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.D100)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Years)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThinningAges)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NAfterThins)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThinTypes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThinCoefs)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hm)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DBH_sd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DBH_max)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Random_SI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Random_BA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Macrostand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pyear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.N)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.D100)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Years)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThinningAges)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAfterThins)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThinTypes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThinCoefs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hm)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

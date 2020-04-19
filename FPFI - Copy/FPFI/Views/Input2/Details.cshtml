@@ -1,0 +1,90 @@
+﻿@model FPFI.Models.Input
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Input</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Macrostand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Macrostand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pyear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pyear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.N)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.N)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dg)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dg)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.D100)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.D100)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Years)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Years)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hm)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

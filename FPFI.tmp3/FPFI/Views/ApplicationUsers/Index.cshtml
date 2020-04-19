@@ -1,0 +1,89 @@
+﻿@model IEnumerable<UserListViewModel>
+@using FPFI.Models.ViewModels
+
+<div class="top-buffer"></div>
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading"></div>
+    </div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <a id="addUserModal"
+               data-toggle="modal" 
+               asp-action="AddUser" 
+               data-target="#modal-action" 
+               class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i>  Add user
+            </a>
+        </div>
+        <div class="top-buffer"></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    @*<th>Image</th>*@
+                    <th>Email</th>
+                    <th>Validated</th>
+                    <th>Registered</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>
+                            <div class="userProfilePic" style="background-image:url(@item.ProfileImageUrl)"></div>
+                        </td>*@
+                        <td>@item.Email</td>
+                        <td>@item.Validated</td>
+                        <td>
+                            @String.Format("{0:dd/MM/yy}", item.MemberSince)
+                        </td>
+                        <td>@item.RoleName</td>
+                        <td>
+                            @if (item.Email != "superuser@fpfi.cl" && item.Email != "guille.arp@gmail.com")
+                            {
+                                @if (User.IsInRole("Administrator") || User.IsInRole("Editor"))
+                                {
+                                    <a id="editUserModal"
+                                       data-toggle="modal"
+                                       asp-action="EditUser"
+                                       asp-route-id="@item.ID"
+                                       data-target="#modal-action"
+                                       class="btn btn-info">
+                                        <i class="glyphicon glyphicon-pencil"></i>  Edit
+                                    </a>
+                                    if (User.IsInRole("Administrator"))
+                                    {
+                                        <a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.ID" data-target="#modal-action" class="btn btn-danger">
+                                            <i class="glyphicon glyphicon-trash"></i>  Delete
+                                        </a>
+                                    }
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", AreaLabeledId = "modal-action-label", Size = ModalSize.Medium })
+
+@section scripts
+{
+    <script src="~/js/modal-action.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+        @if(ViewData["User"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    alert("@($"A confirmation email has been sent to the user {ViewData["User"]}")");
+                });
+            </script>
+        }
+}

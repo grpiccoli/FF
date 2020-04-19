@@ -1,0 +1,116 @@
+﻿@model FPFI.Models.Entry3
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Entry3</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Include_Thinning" /> @Html.DisplayNameFor(model => model.Include_Thinning)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ByClass" /> @Html.DisplayNameFor(model => model.ByClass)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stump" class="control-label"></label>
+                <input asp-for="Stump" class="form-control" />
+                <span asp-validation-for="Stump" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MgDisc" class="control-label"></label>
+                <input asp-for="MgDisc" class="form-control" />
+                <span asp-validation-for="MgDisc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LengthDisc" class="control-label"></label>
+                <input asp-for="LengthDisc" class="form-control" />
+                <span asp-validation-for="LengthDisc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUserId" class="control-label"></label>
+                <select asp-for="ApplicationUserId" class ="form-control" asp-items="ViewBag.ApplicationUserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgeStart" class="control-label"></label>
+                <input asp-for="AgeStart" class="form-control" />
+                <span asp-validation-for="AgeStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgeEnd" class="control-label"></label>
+                <input asp-for="AgeEnd" class="form-control" />
+                <span asp-validation-for="AgeEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Distribution" class="control-label"></label>
+                <select asp-for="Distribution" class="form-control"></select>
+                <span asp-validation-for="Distribution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DistributionThinning" class="control-label"></label>
+                <select asp-for="DistributionThinning" class="form-control"></select>
+                <span asp-validation-for="DistributionThinning" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <select asp-for="Model" class="form-control"></select>
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolumeFormula" class="control-label"></label>
+                <select asp-for="VolumeFormula" class="form-control"></select>
+                <span asp-validation-for="VolumeFormula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Way" class="control-label"></label>
+                <select asp-for="Way" class="form-control"></select>
+                <span asp-validation-for="Way" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IP" class="control-label"></label>
+                <input asp-for="IP" class="form-control" />
+                <span asp-validation-for="IP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProcessStart" class="control-label"></label>
+                <input asp-for="ProcessStart" class="form-control" />
+                <span asp-validation-for="ProcessStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProcessTime" class="control-label"></label>
+                <input asp-for="ProcessTime" class="form-control" />
+                <span asp-validation-for="ProcessTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stage" class="control-label"></label>
+                <select asp-for="Stage" class="form-control"></select>
+                <span asp-validation-for="Stage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

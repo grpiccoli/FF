@@ -1,0 +1,150 @@
+﻿@model FPFI.Models.Input3
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Input3</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DBH_sd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DBH_sd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DBH_max)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DBH_max)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Random_SI)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Random_SI)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Random_BA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Random_BA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id_)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Macrostand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Macrostand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pyear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pyear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.N)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.N)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dg)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dg)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.D100)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.D100)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Years)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Years)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ThinningAges)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ThinningAges)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NAfterThins)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NAfterThins)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ThinTypes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ThinTypes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ThinCoefs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ThinCoefs)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hm)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Entry)
+        </dt>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,64 @@
+﻿@model FPFI.Models.Entry3
+
+@{
+    ViewData["Title"] = "2 Upload File";
+    ViewData.AddActivePage(EntriesNavPages.Step2);
+}
+
+@section Styles{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/step2.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/step2.min.css" asp-append-version="true" />
+    </environment>
+}
+
+<div class="progress feed hidden" style="height:20px;">
+    <div id="progressHub" class='progress-bar progress-bar-striped active'
+         role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style="width:0%;">
+        0%
+    </div>
+</div>
+<div id="log" class="log col-12 feed hidden" style="max-height:1.5em;background-color:#343a40;color:azure;">
+    <p>Processing...</p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form id="upload" method="post">
+            <input type="hidden" name="userId" />
+            @Html.AntiForgeryToken()
+        </form>
+
+        <div id="MessageUploaderDone"></div>
+
+        <!-- Fine Uploader DOM Element
+        ====================================================================== -->
+        <div id="fine-uploader-manual-trigger"></div>
+
+        <div id="MessageUploaderError" style="color:red;"></div>
+    </div>
+</div>
+
+<partial name="_FineUploader" model="Model.Id" />
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    @{var err = (bool?)ViewData["Error"];
+        if (err.HasValue && err.Value)
+        {
+            <script>
+                $(document).ready(function () {
+                    alert("Wrong file format!");
+                });
+            </script>
+        }
+    }
+    <script>
+        $(document).ready(function () {
+            $("input[type=submit]").attr("disabled",true);
+        });
+    </script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/entry.js"></script>
+}

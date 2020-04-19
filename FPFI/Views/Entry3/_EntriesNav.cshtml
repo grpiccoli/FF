@@ -1,0 +1,15 @@
+﻿@using FPFI.Views.Entry3
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var Id = ViewContext.RouteData.Values["id"] != null ? ViewContext.RouteData.Values["id"].ToString() : null;
+    var activePage = ViewContext.ViewData["ActivePage"] as string;
+}
+
+<ul class="nav nav-tabs step-anchor">
+    <li class="@EntriesNavPages.Step1NavClass(activePage)"><a asp-action="Step1" asp-route-id="@Id" class="@EntriesNavPages.Step1NavClass(activePage)">Step 1<br /><small>Configure</small></a></li>
+    <li class="@EntriesNavPages.Step2NavClass(activePage)"><a asp-action="Step2" asp-route-id="@Id" class="@EntriesNavPages.Step2NavClass(activePage)">Step 2<br /><small>Upload File</small></a></li>
+    <li class="@EntriesNavPages.Step3NavClass(activePage)"><a asp-action="Step3" asp-route-id="@Id" class="@EntriesNavPages.Step3NavClass(activePage)">Step 3<br /><small>Validate Initial Input</small></a></li>
+    <li class="@EntriesNavPages.Step4NavClass(activePage)"><a asp-action="Step4" asp-route-id="@Id" class="@EntriesNavPages.Step4NavClass(activePage)">Step 4<br /><small>Validate Products</small></a></li>
+    <li class="@EntriesNavPages.Step5NavClass(activePage)"><a asp-action="Step5" asp-route-id="@Id" class="@EntriesNavPages.Step5NavClass(activePage)">Step 5<br /><small>Validate Parameters</small></a></li>
+</ul>
